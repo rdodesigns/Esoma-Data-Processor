@@ -6,8 +6,10 @@ analyse the resulting data, and then ship the results as JSON packets to other
 programs.
 
 Before using this library you will need:
+
   - .NET (Windows) or Mono (any platform)
   - [NAnt][nant], a C# build tool.
+
 
 Install
 =======
