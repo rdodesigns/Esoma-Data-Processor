@@ -12,19 +12,13 @@ class DataProcessor
     po.start();
     po2.start();
 
-    IList keys = drg.getKeys();
+    while(Console.ReadKey(true).Key != ConsoleKey.Escape){ }
 
-    while(Console.KeyAvailable){ }
+    po.stop();
+    po2.stop();
+    //System.Environment.Exit(0);
   }
 
-  //public bool readKeyboard()
-  //{
-    //if (Console.KeyAvailable)
-      //if (Console.ReadKey(true).Key == ConsoleKey.Escape)
-        //return false;
-
-    //return true;
-  //}
 } // end class DataProcessor
 
 

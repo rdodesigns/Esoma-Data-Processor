@@ -7,10 +7,11 @@ namespace Device
 {
   public abstract class Device
   {
-    private DataRecord.DataRecordGenerator drg;
     protected string name;
     protected SortedList data = new SortedList();
-    protected bool stopped = false;
+    private DataRecord.DataRecordGenerator drg;
+    private bool stopped = false;
+    private bool end = false;
 
     public Device(DataRecord.DataRecordGenerator drg)
     {
@@ -32,10 +33,12 @@ namespace Device
         System.Console.WriteLine("ERROR: Device {0} is stopped due to an error.", this.name);
     }
 
+    public void stop() { end = true;}
+
     protected abstract void getInput();
 
     public void acquireData(){
-      while (true){
+      while (!end){
         System.Threading.Thread.Sleep(1000);
         this.getInput();
         this.sendToDataRecord();
