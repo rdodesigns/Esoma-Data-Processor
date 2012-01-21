@@ -1,14 +1,14 @@
 using System;
+using System.Collections;
 
 namespace DataRecord
 {
   public class DataRecord
   {
-
-    public DataRecord()
+    SortedList data;
+    public DataRecord(SortedList data)
     {
-      System.Console.WriteLine("Created DataRecord object.");
-
+      this.data = new SortedList(data);
     }
   }
 }

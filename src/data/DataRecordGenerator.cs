@@ -34,9 +34,9 @@ namespace DataRecord
     }
 
     public void addValues(SortedList incoming){
-      for(int i=0; i < incoming.Count; i++){
+      for(int i=0; i < incoming.Count; i++)
         this.data[incoming.GetKey(i)] = incoming.GetByIndex(i);
-      }
+      new DataRecord(data);
     }
 
   }
