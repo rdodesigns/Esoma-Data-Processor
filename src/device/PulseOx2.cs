@@ -4,13 +4,13 @@ using pulsoximeter;
 
 namespace Device
 {
-  public class PulseOx : Device
+  public class PulseOx2 : Device
   {
     private bool running = false;
     private bool mode;
     OnyxII po;
 
-    public PulseOx(AutoResetEvent autoEvent,
+    public PulseOx2(AutoResetEvent autoEvent,
                    DataRecord.DataRecordGenerator drg)
                   : base(autoEvent, drg) {}
     //~PulseOx(){}
@@ -26,15 +26,15 @@ namespace Device
     }
 
     protected override void registerDataTypes(){
-      data.Add("Heart Rate", new int());
-      data.Add("Blood Oxygenation", new int());
+      data.Add("Heart Rate 2", new int());
+      data.Add("Blood Oxygenation 2", new int());
     }
 
     protected override void getInput(){
       string str = po.GetHrAndSpo2();
       int[] vals = parseData(str);
-      data["Heart Rate"] = vals[0];
-      data["Blood Oxygenation"] = vals[1];
+      data["Heart Rate 2"] = vals[0];
+      data["Blood Oxygenation 2"] = vals[1];
     }
 
     private int[] parseData(string str){
@@ -49,3 +49,4 @@ namespace Device
 
   }
 }
+

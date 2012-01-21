@@ -25,12 +25,19 @@ namespace Device
     protected abstract void init();
     protected abstract void registerDataTypes();
 
-    public abstract void start();
+    public void start(){
+      Thread t = new Thread(acquireData);
+      t.Start();
+    }
+
     protected abstract void getInput();
 
     public void acquireData(){
-      this.getInput();
-      this.sendToDataRecord();
+      while (true){
+        System.Threading.Thread.Sleep(1000);
+        this.getInput();
+        this.sendToDataRecord();
+      }
     }
 
     protected void registerWithDataRecord(){
@@ -39,7 +46,9 @@ namespace Device
     }
 
     protected void sendToDataRecord() {
-      drg.addValues(data);
+      lock(drg.loc){
+        drg.addValues(data);
+      }
     }
 
   }

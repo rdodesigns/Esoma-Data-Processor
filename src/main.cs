@@ -8,15 +8,23 @@ class DataProcessor
   {
     DataRecord.DataRecordGenerator drg = new DataRecord.DataRecordGenerator();
     Device.PulseOx po = new Device.PulseOx(new AutoResetEvent(false), drg);
-    po.setSimulateMode();
+    Device.PulseOx2 po2 = new Device.PulseOx2(new AutoResetEvent(false), drg);
     po.start();
+    po2.start();
 
     IList keys = drg.getKeys();
 
-    System.Console.WriteLine("Keys in Data Records.");
-    for(int i = 0; i < keys.Count; i++)
-      System.Console.WriteLine(keys[i]);
+    while(Console.KeyAvailable){ }
   }
+
+  //public bool readKeyboard()
+  //{
+    //if (Console.KeyAvailable)
+      //if (Console.ReadKey(true).Key == ConsoleKey.Escape)
+        //return false;
+
+    //return true;
+  //}
 }
 
 

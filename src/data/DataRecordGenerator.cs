@@ -7,6 +7,7 @@ namespace DataRecord
   public class DataRecordGenerator
   {
     private SortedList data = new SortedList();
+    public System.Object loc = new System.Object();
 
     public DataRecordGenerator()
     {
