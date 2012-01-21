@@ -39,5 +39,12 @@ namespace DataRecord
       System.Console.Write("\n");
     }
 
+    public void addValues(object[] incoming){
+      for(int i=0; i < incoming.GetLength(0); i++){
+        data[incoming[0]] = incoming[1];
+        System.Console.WriteLine("{0} {1}", incoming[0], incoming[1]);
+      }
+    }
+
   }
 }

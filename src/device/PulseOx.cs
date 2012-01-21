@@ -12,8 +12,8 @@ namespace Device
 
     public PulseOx(AutoResetEvent autoEvent, DataRecord.DataRecordGenerator drg, bool mode): base(autoEvent, drg)
     {
-      dataTypes = new object[2,2] {{"Heart Rate", new int()},
-                                   {"Blood Oxygenation", new int()}};
+      data = new object[2,2] {{"Heart Rate", new int()},
+                              {"Blood Oxygenation", new int()}};
       this.mode = mode;
       System.Console.WriteLine("Created PulseOx object, simulated {0}.", mode);
       this.registerDataForRecord();
