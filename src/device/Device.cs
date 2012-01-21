@@ -47,7 +47,7 @@ namespace Device
         for(int i = 0; i < data.Count; i++)
           drg.addDataField((string) data.GetKey(i), data.GetByIndex(i));
       }
-      catch(Exception ex){
+      catch (Exception ex){
         System.Console.WriteLine(ex);
         this.stopped = true;
         unregisterWithDataRecord();
@@ -61,9 +61,14 @@ namespace Device
 
     private void sendToDataRecord() {
       lock(drg.loc){
-        drg.addValues(data);
+        try {
+          drg.addValues(data);
+        }
+        catch (Exception ex) {
+          throw ex;
+        }
       }
     }
 
-  }
-}
+  } // end class Device
+} // end namespace Device
