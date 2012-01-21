@@ -7,7 +7,8 @@ class DataProcessor
   public static void Main()
   {
     DataRecord.DataRecordGenerator drg = new DataRecord.DataRecordGenerator();
-    Device.PulseOx po = new Device.PulseOx(new AutoResetEvent(false), drg, true);
+    Device.PulseOx po = new Device.PulseOx(new AutoResetEvent(false), drg);
+    po.setSimulateMode();
     po.start();
 
     IList keys = drg.getKeys();

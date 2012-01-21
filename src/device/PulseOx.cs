@@ -1,6 +1,6 @@
 using System;
-using pulsoximeter;
 using System.Threading;
+using pulsoximeter;
 
 namespace Device
 {
@@ -10,30 +10,32 @@ namespace Device
     private bool mode;
     OnyxII po;
 
-    public PulseOx(AutoResetEvent autoEvent, DataRecord.DataRecordGenerator drg, bool mode): base(autoEvent, drg)
-    {
-      data.Add("Heart Rate", new int());
-      data.Add("Blood Oxygenation", new int());
+    public PulseOx(AutoResetEvent autoEvent,
+                   DataRecord.DataRecordGenerator drg)
+                  : base(autoEvent, drg) {}
+    //~PulseOx(){}
 
-      this.mode = mode;
-      System.Console.WriteLine("Created PulseOx object, simulated {0}.", mode);
-      this.registerDataForRecord();
-    }
+    protected override void init() {
+      this.name = "PulseOx";
 
-    ~PulseOx(){
-      System.Console.WriteLine("PulseOx object deallocated.");
-    }
-
-    public override void start() {
       if (!running){
         po = new OnyxII(mode);
 
-        for (int i = 0; i < 10; i++) {
-          this.acquireData();
-        }
+        //for (int i = 0; i < 10; i++) {
+          //this.acquireData();
+        //}
 
         running = true;
       }
+    }
+
+    protected override void registerDataTypes(){
+      data.Add("Heart Rate", new int());
+      data.Add("Blood Oxygenation", new int());
+    }
+
+
+    public override void start() {
     }
 
     protected override void getInput(){
@@ -46,6 +48,10 @@ namespace Device
     private int[] parseData(string str){
       string[] vals = str.Split(',');
       return new int[] {int.Parse(vals[0]), int.Parse(vals[1])};
+    }
+
+    public void setSimulateMode(){
+      mode = true;
     }
 
   }
