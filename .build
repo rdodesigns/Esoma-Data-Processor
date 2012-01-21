@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<project name="Data Process Server" default="build" basedir=".">
+  <description>Data Processor of Esoma</description>
+
+  <!--Properties about the project-->
+  <property name="debug" value="true" overwrite="false" />
+  <property name="lib.dir" value="lib"/>
+  <property name="build.dir" value="bin"/>
+  <property name="src.dir" value="src"/>
+  <property name="exe" value="${build.dir}/dps.exe"/>
+
+  <!--Target clean-->
+  <target name="clean" description="remove all generated files">
+    <delete file="${exe}" failonerror="false" />
+    <delete dir="${build.dir}" failonerror="false" />
+  </target>
+
+  <!--Target build-->
+  <target name="build" description="compiles the source code">
+    <csc target="exe" output="${exe}" debug="${debug}">
+      <sources basedir="${src.dir}">
+        <include name="**/*.cs" />
+      </sources>
+
+      <references basedir="${lib.dir}">
+        <include name="*.dll" />
+      </references>
+    </csc>
+
+    <copy todir="${build.dir}">
+      <fileset basedir="${lib.dir}">
+      <include name="*.dll" />
+      </fileset>
+    </copy>
+  </target>
+
+  <!--Target run-->
+  <target name="run" description="Run Data Processing Server">
+    <exec program="${exe}"/>
+  </target>
+
+</project>
