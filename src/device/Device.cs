@@ -43,11 +43,14 @@ namespace Device
     }
 
     private void registerWithDataRecord(){
-      for(int i = 0; i < data.Count; i++){
-        if (!drg.addDataField((string) data.GetKey(i), data.GetByIndex(i))){
-          this.stopped = true;
-          unregisterWithDataRecord();
-        }
+      try {
+        for(int i = 0; i < data.Count; i++)
+          drg.addDataField((string) data.GetKey(i), data.GetByIndex(i));
+      }
+      catch(Exception ex){
+        System.Console.WriteLine(ex);
+        this.stopped = true;
+        unregisterWithDataRecord();
       }
     }
 
