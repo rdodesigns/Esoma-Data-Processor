@@ -39,7 +39,6 @@ namespace Device
     public override void getInput(){
       string str = po.GetHrAndSpo2();
       int[] vals = parseData(str);
-      //System.Console.WriteLine("HR:{0}\tBO:{1}",vals[0], vals[1]);
       data["Heart Rate"] = vals[0];
       data["Blood Oxygenation"] = vals[1];
       this.sendToDataRecord();

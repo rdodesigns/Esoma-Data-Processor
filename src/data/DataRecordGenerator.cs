@@ -14,7 +14,7 @@ namespace DataRecord
     }
 
     public void addDataField(string key, object val){
-      if (key == null){
+      if (key == null || key == ""){
         System.Console.WriteLine("Could not add {0} to DataRecordGenerator.", val);
         return;
       }
@@ -29,17 +29,13 @@ namespace DataRecord
       return;
     }
 
-    public void listKeys(){
-      System.Console.Write("Keys in DataRecordGenerator");
-      for(int i = 0; i < data.Count; i++)
-        System.Console.Write(", {0} ({1})", data.GetKey(i), data.GetByIndex(i));
-      System.Console.Write("\n");
+    public IList getKeys(){
+      return data.GetKeyList();
     }
 
     public void addValues(SortedList incoming){
       for(int i=0; i < incoming.Count; i++){
         this.data[incoming.GetKey(i)] = incoming.GetByIndex(i);
-        System.Console.WriteLine("{0} {1}", incoming.GetKey(i), incoming.GetByIndex(i));
       }
     }
 
