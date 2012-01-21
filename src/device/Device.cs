@@ -19,7 +19,12 @@ namespace Device
     }
 
     public abstract void start();
-    public abstract void getInput();
+    protected abstract void getInput();
+
+    public void acquireData(){
+      this.getInput();
+      this.sendToDataRecord();
+    }
 
     protected void registerDataForRecord(){
       for(int i = 0; i < data.Count; i++)

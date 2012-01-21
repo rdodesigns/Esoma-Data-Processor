@@ -29,19 +29,18 @@ namespace Device
         po = new OnyxII(mode);
 
         for (int i = 0; i < 10; i++) {
-          getInput();
+          this.acquireData();
         }
 
         running = true;
       }
     }
 
-    public override void getInput(){
+    protected override void getInput(){
       string str = po.GetHrAndSpo2();
       int[] vals = parseData(str);
       data["Heart Rate"] = vals[0];
       data["Blood Oxygenation"] = vals[1];
-      this.sendToDataRecord();
     }
 
     private int[] parseData(string str){
