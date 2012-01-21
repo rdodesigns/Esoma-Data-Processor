@@ -6,8 +6,7 @@ namespace DataRecord
 {
   public class DataRecordGenerator
   {
-    private Hashtable data = new Hashtable();
-    private List<string> order = new List<string>();
+    private SortedList data = new SortedList();
 
     public DataRecordGenerator()
     {
@@ -20,11 +19,10 @@ namespace DataRecord
         return;
       }
       data.Add(key, val);
-      order.Add(key);
     }
 
-    public bool removeKey(string key){
-      return order.Remove(key);
+    public void removeKey(string key){
+      data.Remove(key);
     }
 
     public void setOrderOfKeys(string[] order){
@@ -33,16 +31,15 @@ namespace DataRecord
 
     public void listKeys(){
       System.Console.Write("Keys in DataRecordGenerator");
-      foreach(string key in order){
-        System.Console.Write(", {0} ({1})", key, data[key].GetType());
-      }
+      for(int i = 0; i < data.Count; i++)
+        System.Console.Write(", {0} ({1})", data.GetKey(i), data.GetByIndex(i));
       System.Console.Write("\n");
     }
 
-    public void addValues(object[] incoming){
-      for(int i=0; i < incoming.GetLength(0); i++){
-        data[incoming[0]] = incoming[1];
-        System.Console.WriteLine("{0} {1}", incoming[0], incoming[1]);
+    public void addValues(SortedList incoming){
+      for(int i=0; i < incoming.Count; i++){
+        this.data[incoming.GetKey(i)] = incoming.GetByIndex(i);
+        System.Console.WriteLine("{0} {1}", incoming.GetKey(i), incoming.GetByIndex(i));
       }
     }
 

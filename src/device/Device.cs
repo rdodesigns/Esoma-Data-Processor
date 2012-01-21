@@ -1,5 +1,7 @@
 using System;
 using System.Threading;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace Device
 {
@@ -7,7 +9,7 @@ namespace Device
   {
     private AutoResetEvent autoEvent;
     private DataRecord.DataRecordGenerator drg;
-    protected object[,] dataTypes;
+    protected SortedList data = new SortedList();
 
     public Device(AutoResetEvent autoEvent, DataRecord.DataRecordGenerator drg)
     {
@@ -20,11 +22,13 @@ namespace Device
     public abstract void getInput();
 
     protected void registerDataForRecord(){
-      for(int i = 0; i < dataTypes.GetLength(0); i++)
-        drg.addDataField((string) dataTypes[i,0], dataTypes[i,1]);
+      for(int i = 0; i < data.Count; i++)
+        drg.addDataField((string) data.GetKey(i), data.GetByIndex(i));
     }
 
-    private void sendToDataRecord() {}
+    protected void sendToDataRecord() {
+      drg.addValues(data);
+    }
 
   }
 }
