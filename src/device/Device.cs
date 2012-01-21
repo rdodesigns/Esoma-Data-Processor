@@ -39,7 +39,6 @@ namespace Device
 
     public void acquireData(){
       while (!end){
-        System.Threading.Thread.Sleep(1000);
         this.getInput();
         this.sendToDataRecord();
       }
