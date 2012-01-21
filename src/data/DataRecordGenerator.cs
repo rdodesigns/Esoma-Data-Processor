@@ -16,12 +16,12 @@ namespace DataRecord
 
     public bool addDataField(string key, object val){
       if (key == null || key == ""){
-        System.Console.WriteLine("Could not add {0} to DataRecordGenerator.", val);
+        System.Console.WriteLine("ERROR: Could not add {0} to DataRecordGenerator.", val);
         return false;
       }
 
       if (data.ContainsKey(key)){
-        System.Console.WriteLine("Key already exists.");
+        System.Console.WriteLine("ERROR: Key already exists.");
         return false;
       }
 

@@ -29,7 +29,7 @@ namespace Device
         Thread t = new Thread(acquireData);
         t.Start();
       } else
-        System.Console.WriteLine("Device {0} is stopped due to an error.", this.name);
+        System.Console.WriteLine("ERROR: Device {0} is stopped due to an error.", this.name);
     }
 
     protected abstract void getInput();
