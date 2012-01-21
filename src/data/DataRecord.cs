@@ -13,5 +13,5 @@ namespace DataRecord
       for(int i = 0; i < data.Count; i++)
         System.Console.WriteLine("{0}: {1}", data.GetKey(i), data.GetByIndex(i));
     }
-  }
-}
+  } // end class DataRecord
+} // end namespace DataRecord

@@ -45,6 +45,5 @@ namespace Device
       this.mode = true;
     }
 
-  }
-}
-
+  } // end class PulseOx2
+} // end namespace Device

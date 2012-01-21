@@ -65,6 +65,7 @@ namespace Device
           drg.addValues(data);
         }
         catch (Exception ex) {
+          System.Console.WriteLine("ERROR: {0} Could not send to DataRecordGenerator", name);
           throw ex;
         }
       }
