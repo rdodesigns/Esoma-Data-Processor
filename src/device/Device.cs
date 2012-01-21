@@ -11,7 +11,7 @@ namespace Device
     protected SortedList data = new SortedList();
     private DataRecord.DataRecordGenerator drg;
     private bool stopped = false;
-    private bool end = false;
+    private volatile bool end = false;
 
     public Device(DataRecord.DataRecordGenerator drg)
     {
