@@ -12,10 +12,11 @@ namespace Device
 
     public PulseOx(AutoResetEvent autoEvent, DataRecord.DataRecordGenerator drg, bool mode): base(autoEvent, drg)
     {
+      dataTypes = new object[2,2] {{"Heart Rate", new int()},
+                                   {"Blood Oxygenation", new int()}};
       this.mode = mode;
-      registerDataForRecord(drg);
       System.Console.WriteLine("Created PulseOx object, simulated {0}.", mode);
-
+      this.registerDataForRecord();
     }
 
     ~PulseOx(){
@@ -43,11 +44,6 @@ namespace Device
     private int[] parseData(string str){
       string[] vals = str.Split(',');
       return new int[] {int.Parse(vals[0]), int.Parse(vals[1])};
-    }
-
-    protected override void registerDataForRecord(DataRecord.DataRecordGenerator drg){
-      drg.addDataField("Heart Rate", new int());
-      drg.addDataField("Blood Oxygenation", new int());
     }
 
   }

@@ -34,7 +34,7 @@ namespace DataRecord
     public void listKeys(){
       System.Console.Write("Keys in DataRecordGenerator");
       foreach(string key in order){
-        System.Console.Write(", {0}", key);
+        System.Console.Write(", {0} ({1})", key, data[key].GetType());
       }
       System.Console.Write("\n");
     }
