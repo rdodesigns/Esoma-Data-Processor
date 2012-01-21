@@ -1,0 +1,34 @@
+Introduction
+============
+
+Esoma uses this program as a way to integrate data from several devices,
+analyse the resulting data, and then ship the results as JSON packets to other
+programs.
+
+Before using this library you will need:
+  - .NET (Windows) or Mono (any platform)
+  - [NAnt][nant], a C# build tool.
+
+Install
+=======
+
+    nant
+
+This should place the executable `dps.exe` inside the _bin/_ directory.
+
+Run
+===
+
+    nant run
+
+or
+
+    mono bin/dps.exe
+
+
+<!-- Links -->
+[nant]: http://nant.sourceforge.net/ "NAnt homepage"
+
+<!-- vim settings -->
+<!-- vim: set spelllang=en_gb: -->
+<!-- vim: set spell: -->
