@@ -1,12 +1,14 @@
 using System;
-using pulsoximeter;
+using System.Threading;
 
 class DataProcessor
 {
   public static void Main()
   {
-    DataRecord.DataRecord dr = new DataRecord.DataRecord();
-    Device.PulseOx po = new Device.PulseOx(true);
+    DataRecord.DataRecordGenerator drg = new DataRecord.DataRecordGenerator();
+    Device.PulseOx po = new Device.PulseOx(new AutoResetEvent(false), drg, true);
+    po.start();
+    drg.listKeys();
   }
 }
 

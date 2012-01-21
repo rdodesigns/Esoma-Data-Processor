@@ -35,7 +35,7 @@
   </target>
 
   <!--Target run-->
-  <target name="run" description="Run Data Processing Server">
+  <target name="run" depends="build" description="Run Data Processing Server">
     <exec program="${exe}"/>
   </target>
 
