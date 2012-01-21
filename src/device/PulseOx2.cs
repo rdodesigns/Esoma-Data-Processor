@@ -10,13 +10,11 @@ namespace Device
     private bool mode;
     OnyxII po;
 
-    public PulseOx2(AutoResetEvent autoEvent,
-                   DataRecord.DataRecordGenerator drg)
-                  : base(autoEvent, drg) {}
+    public PulseOx2(DataRecord.DataRecordGenerator drg): base(drg) {}
     //~PulseOx(){}
 
     protected override void init() {
-      this.name = "PulseOx";
+      this.name = "PulseOx2";
       this.mode = true;
 
       if (!running){
@@ -26,14 +24,14 @@ namespace Device
     }
 
     protected override void registerDataTypes(){
-      data.Add("Heart Rate 2", new int());
+      data.Add("Heart Rate", new int());
       data.Add("Blood Oxygenation 2", new int());
     }
 
     protected override void getInput(){
       string str = po.GetHrAndSpo2();
       int[] vals = parseData(str);
-      data["Heart Rate 2"] = vals[0];
+      data["Heart Rate"] = vals[0];
       data["Blood Oxygenation 2"] = vals[1];
     }
 

@@ -7,8 +7,8 @@ class DataProcessor
   public static void Main()
   {
     DataRecord.DataRecordGenerator drg = new DataRecord.DataRecordGenerator();
-    Device.PulseOx po = new Device.PulseOx(new AutoResetEvent(false), drg);
-    Device.PulseOx2 po2 = new Device.PulseOx2(new AutoResetEvent(false), drg);
+    Device.PulseOx po = new Device.PulseOx(drg);
+    Device.PulseOx2 po2 = new Device.PulseOx2(drg);
     po.start();
     po2.start();
 

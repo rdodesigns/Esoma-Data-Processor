@@ -14,12 +14,19 @@ namespace DataRecord
       System.Console.WriteLine("Created DataRecordGenerator object.");
     }
 
-    public void addDataField(string key, object val){
+    public bool addDataField(string key, object val){
       if (key == null || key == ""){
         System.Console.WriteLine("Could not add {0} to DataRecordGenerator.", val);
-        return;
+        return false;
       }
+
+      if (data.ContainsKey(key)){
+        System.Console.WriteLine("Key already exists.");
+        return false;
+      }
+
       data.Add(key, val);
+      return true;
     }
 
     public void removeKey(string key){

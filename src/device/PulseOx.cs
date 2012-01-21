@@ -10,9 +10,7 @@ namespace Device
     private bool mode;
     OnyxII po;
 
-    public PulseOx(AutoResetEvent autoEvent,
-                   DataRecord.DataRecordGenerator drg)
-                  : base(autoEvent, drg) {}
+    public PulseOx(DataRecord.DataRecordGenerator drg): base(drg) {}
     //~PulseOx(){}
 
     protected override void init() {

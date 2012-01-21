@@ -7,16 +7,15 @@ namespace Device
 {
   public abstract class Device
   {
-    private AutoResetEvent autoEvent;
     private DataRecord.DataRecordGenerator drg;
     protected string name;
     protected SortedList data = new SortedList();
+    protected bool stopped = false;
 
-    public Device(AutoResetEvent autoEvent, DataRecord.DataRecordGenerator drg)
+    public Device(DataRecord.DataRecordGenerator drg)
     {
       this.init();
       System.Console.WriteLine("Created {0} Device object.", this.name);
-      this.autoEvent = autoEvent;
       this.drg = drg;
       this.registerDataTypes();
       this.registerWithDataRecord();
@@ -26,8 +25,11 @@ namespace Device
     protected abstract void registerDataTypes();
 
     public void start(){
-      Thread t = new Thread(acquireData);
-      t.Start();
+      if(!stopped){
+        Thread t = new Thread(acquireData);
+        t.Start();
+      } else
+        System.Console.WriteLine("Device {0} is stopped due to an error.", this.name);
     }
 
     protected abstract void getInput();
@@ -40,12 +42,21 @@ namespace Device
       }
     }
 
-    protected void registerWithDataRecord(){
-      for(int i = 0; i < data.Count; i++)
-        drg.addDataField((string) data.GetKey(i), data.GetByIndex(i));
+    private void registerWithDataRecord(){
+      for(int i = 0; i < data.Count; i++){
+        if (!drg.addDataField((string) data.GetKey(i), data.GetByIndex(i))){
+          this.stopped = true;
+          unregisterWithDataRecord();
+        }
+      }
     }
 
-    protected void sendToDataRecord() {
+    private void unregisterWithDataRecord(){
+      for(int i = 0; i < data.Count; i++)
+          drg.removeKey((string) data.GetKey(i));
+    }
+
+    private void sendToDataRecord() {
       lock(drg.loc){
         drg.addValues(data);
       }
