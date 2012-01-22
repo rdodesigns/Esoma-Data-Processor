@@ -11,7 +11,13 @@ namespace Device
     protected SortedList data = new SortedList();
     private DataRecord.DataRecordGenerator _drg;
     private bool _stopped = false;
-    private volatile bool _end = false;
+    private volatile bool _end = false; // Will be thread accessed.
+
+    // Methods that require override
+    protected abstract void init();
+    protected abstract void registerDataTypes();
+    protected abstract void getInput();
+
 
     protected Device(DataRecord.DataRecordGenerator drg)
     {
@@ -22,9 +28,8 @@ namespace Device
       _drg.registerWithDataRecord(data);
     }
 
-    protected abstract void init();
-    protected abstract void registerDataTypes();
 
+    // Start data acquisition thread
     public void start(){
       if(!_stopped){
         Thread t = new Thread(acquireData);
@@ -33,10 +38,10 @@ namespace Device
         System.Console.WriteLine("ERROR: Device {0} is stopped due to an error.", this.name);
     }
 
+    // Stop the thread man!
     public void stop() { _end = true;}
 
-    protected abstract void getInput();
-
+    // Thread runs this code.
     public void acquireData(){
       while (!_end){
         this.getInput();
