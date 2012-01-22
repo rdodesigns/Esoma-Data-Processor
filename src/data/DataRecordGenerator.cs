@@ -6,7 +6,7 @@ namespace DataRecord
 {
   public class DataRecordGenerator
   {
-    private SortedList data = new SortedList();
+    private SortedList _data = new SortedList();
     public System.Object loc = new System.Object();
 
     public DataRecordGenerator()
@@ -18,15 +18,15 @@ namespace DataRecord
       if (key == null || key == "")
         throw new System.MemberAccessException("Could not add " + val + " to DataRecordGenerator, key is null");
 
-      if (data.ContainsKey(key)){
+      if (_data.ContainsKey(key)){
         throw new System.MemberAccessException("Key already exists.");
       }
 
-      data.Add(key, val);
+      _data.Add(key, val);
     }
 
     public void removeKey(string key){
-      data.Remove(key);
+      _data.Remove(key);
     }
 
     public void setOrderOfKeys(string[] order){
@@ -34,14 +34,14 @@ namespace DataRecord
     }
 
     public IList getKeys(){
-      return data.GetKeyList();
+      return _data.GetKeyList();
     }
 
     public void addValues(SortedList incoming){
       try{
         for(int i=0; i < incoming.Count; i++)
-          this.data[incoming.GetKey(i)] = incoming.GetByIndex(i);
-        new DataRecord(data);
+          this._data[incoming.GetKey(i)] = incoming.GetByIndex(i);
+        new DataRecord(_data);
       } catch (Exception ex){ throw ex; }
     }
 

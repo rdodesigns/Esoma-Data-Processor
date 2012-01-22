@@ -9,15 +9,15 @@ namespace Device
   {
     protected string name;
     protected SortedList data = new SortedList();
-    private DataRecord.DataRecordGenerator drg;
-    private bool stopped = false;
-    private volatile bool end = false;
+    private DataRecord.DataRecordGenerator _drg;
+    private bool _stopped = false;
+    private volatile bool _end = false;
 
     public Device(DataRecord.DataRecordGenerator drg)
     {
       this.init();
       System.Console.WriteLine("Created {0} Device object.", this.name);
-      this.drg = drg;
+      this._drg = drg;
       this.registerDataTypes();
       this.registerWithDataRecord();
     }
@@ -26,19 +26,19 @@ namespace Device
     protected abstract void registerDataTypes();
 
     public void start(){
-      if(!stopped){
+      if(!_stopped){
         Thread t = new Thread(acquireData);
         t.Start();
       } else
         System.Console.WriteLine("ERROR: Device {0} is stopped due to an error.", this.name);
     }
 
-    public void stop() { end = true;}
+    public void stop() { _end = true;}
 
     protected abstract void getInput();
 
     public void acquireData(){
-      while (!end){
+      while (!_end){
         this.getInput();
         this.sendToDataRecord();
       }
@@ -47,24 +47,24 @@ namespace Device
     private void registerWithDataRecord(){
       try {
         for(int i = 0; i < data.Count; i++)
-          drg.addDataField((string) data.GetKey(i), data.GetByIndex(i));
+          _drg.addDataField((string) data.GetKey(i), data.GetByIndex(i));
       }
       catch (Exception ex){
         System.Console.WriteLine(ex);
-        this.stopped = true;
+        this._stopped = true;
         unregisterWithDataRecord();
       }
     }
 
     private void unregisterWithDataRecord(){
       for(int i = 0; i < data.Count; i++)
-          drg.removeKey((string) data.GetKey(i));
+          _drg.removeKey((string) data.GetKey(i));
     }
 
     private void sendToDataRecord() {
-      lock(drg.loc){
+      lock(_drg.loc){
         try {
-          drg.addValues(data);
+          _drg.addValues(data);
         }
         catch (Exception ex) {
           System.Console.WriteLine("ERROR: {0} Could not send to DataRecordGenerator", name);

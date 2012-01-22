@@ -6,8 +6,8 @@ namespace Device
 {
   public class PulseOx : Device
   {
-    private bool running = false;
-    private bool mode;
+    private bool _running = false;
+    private bool _mode;
     OnyxII po;
 
     public PulseOx(DataRecord.DataRecordGenerator drg): base(drg) {}
@@ -15,11 +15,11 @@ namespace Device
 
     protected override void init() {
       this.name = "PulseOx";
-      this.mode = true;
+      this._mode = true;
 
-      if (!running){
-        po = new OnyxII(mode);
-        running = true;
+      if (!_running){
+        po = new OnyxII(_mode);
+        _running = true;
       }
     }
 
@@ -42,7 +42,7 @@ namespace Device
     }
 
     public void setSimulateMode(){
-      this.mode = true;
+      this._mode = true;
     }
 
   } // end class PulseOx
