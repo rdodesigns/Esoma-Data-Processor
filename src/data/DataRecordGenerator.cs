@@ -23,7 +23,8 @@ namespace DataRecord
 
     public void addDataField(string key, object val){
       if (key == null || key == "")
-        throw new System.MemberAccessException("Could not add " + val + " to DataRecordGenerator, key is null");
+        throw new System.MemberAccessException("Could not add " +
+          val + " to DataRecordGenerator, key is null");
 
       if (_data.ContainsKey(key)){
         throw new System.MemberAccessException("Key already exists.");
@@ -63,7 +64,8 @@ namespace DataRecord
           addValues(data);
         }
         catch (Exception ex) {
-          System.Console.WriteLine("ERROR: Could not send to DataRecordGenerator");
+          System.Console.WriteLine("ERROR: Could not send to " +
+            "DataRecordGenerator");
           throw ex;
         }
       }
@@ -71,7 +73,7 @@ namespace DataRecord
 
     private DateTime getTimestamp()
     {
-        return DateTime.Now;
+        return DateTime.UtcNow;
     }
 
 
