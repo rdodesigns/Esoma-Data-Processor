@@ -10,7 +10,7 @@ namespace Device
     private bool _mode;
     OnyxII po;
 
-    public PulseOx(DataRecord.DataRecordGenerator drg): base(drg) {}
+    public PulseOx(){}
     //~PulseOx(){}
 
     protected override void init() {
@@ -33,10 +33,11 @@ namespace Device
       int[] vals = parseData(str);
       data["Heart Rate"] = vals[0];
       data["Blood Oxygenation"] = vals[1];
+      if (_mode)
+        System.Threading.Thread.Sleep(1000);
     }
 
     private int[] parseData(string str){
-
       string[] vals = str.Split(',');
       return new int[] {int.Parse(vals[0]), int.Parse(vals[1])};
     }

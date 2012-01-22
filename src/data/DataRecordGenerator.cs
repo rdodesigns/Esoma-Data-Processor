@@ -9,11 +9,11 @@ namespace DataRecord
     public System.Object loc = new System.Object();
     private SortedList _data = new SortedList();
     private List<Algorithm.Algorithm> algos = new List<Algorithm.Algorithm>();
+    private List<Device.Device> devices = new List<Device.Device>();
 
     public DataRecordGenerator()
     {
       System.Console.WriteLine("Created DataRecordGenerator object.");
-      _data.Add("Timestamp", new DateTime());
     }
 
     public void removeKey(string key){ _data.Remove(key); }
@@ -38,7 +38,6 @@ namespace DataRecord
       try{
         for(int i=0; i < incoming.Count; i++)
           _data[incoming.GetKey(i)] = incoming.GetByIndex(i);
-        _data["Timestamp"] = getTimestamp();
         new DataRecord(_data);
       } catch (Exception ex){ throw ex; }
     }
@@ -60,7 +59,26 @@ namespace DataRecord
     }
 
     public void registerAlgorithm(Algorithm.Algorithm algo){
+      registerDataFieldWithDataRecord(algo.getDataFields());
       algos.Add(algo);
+    }
+
+    public void registerDevice(Device.Device dev){
+      registerDataFieldWithDataRecord(dev.getData());
+      devices.Add(dev);
+      dev.setDataRecordGenerator(this);
+    }
+
+    public void startGenerating(){
+      foreach(Device.Device dev in devices){
+        dev.start();
+      }
+    }
+
+    public void stopGenerating(){
+      foreach(Device.Device dev in devices){
+        dev.stop();
+      }
     }
 
     public void sendToDataRecord(SortedList data) {
@@ -76,10 +94,6 @@ namespace DataRecord
       }
     }
 
-    private DateTime getTimestamp()
-    {
-        return DateTime.UtcNow;
-    }
 
 
   } // end class DataRecordGenerator

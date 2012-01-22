@@ -18,16 +18,13 @@ namespace Device
     protected abstract void registerDataTypes();
     protected abstract void getInput();
 
-
-    protected Device(DataRecord.DataRecordGenerator drg)
+    protected Device()
     {
       this.init();
       System.Console.WriteLine("Created {0} Device object.", this.name);
-      this._drg = drg;
       this.registerDataTypes();
-      _drg.registerDataFieldWithDataRecord(data);
+      data.Add("Timestamp", new DateTime());
     }
-
 
     // Start data acquisition thread
     public void start(){
@@ -45,8 +42,20 @@ namespace Device
     public void acquireData(){
       while (!_end){
         this.getInput();
+        data["Timestamp"] = getTimestamp();
         _drg.sendToDataRecord(data);
       }
+    }
+
+    public SortedList getData(){ return data; }
+
+    private DateTime getTimestamp()
+    {
+        return DateTime.UtcNow;
+    }
+
+    public void setDataRecordGenerator(DataRecord.DataRecordGenerator drg){
+      this._drg = drg;
     }
 
   } // end class Device

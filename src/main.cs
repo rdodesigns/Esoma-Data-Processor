@@ -7,13 +7,15 @@ class DataProcessor
   public static void Main()
   {
     DataRecord.DataRecordGenerator drg = new DataRecord.DataRecordGenerator();
-    Device.PulseOx po = new Device.PulseOx(drg);
-    Algorithm.Met met = new Algorithm.Met(drg);
-    po.start();
+
+    drg.registerAlgorithm(new Algorithm.Met());
+    drg.registerDevice(new Device.PulseOx());
+
+    drg.startGenerating();
 
     while(Console.ReadKey(true).Key != ConsoleKey.Escape){ }
 
-    po.stop();
+    drg.stopGenerating();
     //System.Environment.Exit(0);
   }
 

@@ -6,9 +6,7 @@ namespace Algorithm
   {
     private float met;
 
-    public Met(DataRecord.DataRecordGenerator drg):base(drg){ }
-
-    protected override void init(){
+    public Met(){
       System.Console.WriteLine("Initialised Met calculator.");
     }
 

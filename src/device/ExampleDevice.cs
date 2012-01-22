@@ -6,9 +6,7 @@ namespace Device
 {
   public class ExampleDevice : Device
   {
-    OnyxII po;
-
-    public ExampleDevice(DataRecord.DataRecordGenerator drg): base(drg) {}
+    public ExampleDevice(){}
     //~ExampleDevice(){}
 
     protected override void init() {
