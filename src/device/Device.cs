@@ -25,7 +25,7 @@ namespace Device
       System.Console.WriteLine("Created {0} Device object.", this.name);
       this._drg = drg;
       this.registerDataTypes();
-      _drg.registerWithDataRecord(data);
+      _drg.registerDataFieldWithDataRecord(data);
     }
 
 

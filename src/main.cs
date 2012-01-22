@@ -8,6 +8,7 @@ class DataProcessor
   {
     DataRecord.DataRecordGenerator drg = new DataRecord.DataRecordGenerator();
     Device.PulseOx po = new Device.PulseOx(drg);
+    Algorithm.Met met = new Algorithm.Met(drg);
     po.start();
 
     while(Console.ReadKey(true).Key != ConsoleKey.Escape){ }

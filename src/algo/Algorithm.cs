@@ -6,14 +6,13 @@ namespace Algorithm
   public abstract class Algorithm
   {
     protected SortedList data = new SortedList();
-    private DataRecord.DataRecordGenerator _drg;
 
     protected Algorithm(DataRecord.DataRecordGenerator drg)
     {
       this.init();
-      this._drg = drg;
       this.registerDataTypes();
-      _drg.registerWithDataRecord(data);
+      drg.registerDataFieldWithDataRecord(data);
+      drg.registerAlgorithm(this);
     }
 
     protected abstract void init();

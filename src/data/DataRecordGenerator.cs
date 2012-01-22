@@ -6,8 +6,9 @@ namespace DataRecord
 {
   public class DataRecordGenerator
   {
-    private SortedList _data = new SortedList();
     public System.Object loc = new System.Object();
+    private SortedList _data = new SortedList();
+    private List<Algorithm.Algorithm> algos = new List<Algorithm.Algorithm>();
 
     public DataRecordGenerator()
     {
@@ -42,20 +43,24 @@ namespace DataRecord
       } catch (Exception ex){ throw ex; }
     }
 
-    public void registerWithDataRecord(SortedList data){
+    public void registerDataFieldWithDataRecord(SortedList data){
       try {
         for(int i = 0; i < data.Count; i++)
           addDataField((string) data.GetKey(i), data.GetByIndex(i));
       }
       catch (Exception ex){
         System.Console.WriteLine(ex);
-        unregisterWithDataRecord(data);
+        unregisterDataFieldWithDataRecord(data);
       }
     }
 
-    private void unregisterWithDataRecord(SortedList data){
+    private void unregisterDataFieldWithDataRecord(SortedList data){
       for(int i = 0; i < data.Count; i++)
           removeKey((string) data.GetKey(i));
+    }
+
+    public void registerAlgorithm(Algorithm.Algorithm algo){
+      algos.Add(algo);
     }
 
     public void sendToDataRecord(SortedList data) {
