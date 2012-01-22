@@ -12,7 +12,14 @@ namespace DataRecord
     public DataRecordGenerator()
     {
       System.Console.WriteLine("Created DataRecordGenerator object.");
+      _data.Add("Timestamp", new DateTime());
     }
+
+    public void removeKey(string key){ _data.Remove(key); }
+
+    public IList getKeys(){ return _data.GetKeyList(); }
+
+    public bool ContainsKey(string key){return _data.ContainsKey(key);}
 
     public void addDataField(string key, object val){
       if (key == null || key == "")
@@ -25,22 +32,11 @@ namespace DataRecord
       _data.Add(key, val);
     }
 
-    public void removeKey(string key){
-      _data.Remove(key);
-    }
-
-    public void setOrderOfKeys(string[] order){
-      return;
-    }
-
-    public IList getKeys(){
-      return _data.GetKeyList();
-    }
-
     public void addValues(SortedList incoming){
       try{
         for(int i=0; i < incoming.Count; i++)
-          this._data[incoming.GetKey(i)] = incoming.GetByIndex(i);
+          _data[incoming.GetKey(i)] = incoming.GetByIndex(i);
+        _data["Timestamp"] = getTimestamp();
         new DataRecord(_data);
       } catch (Exception ex){ throw ex; }
     }
@@ -72,6 +68,12 @@ namespace DataRecord
         }
       }
     }
+
+    private DateTime getTimestamp()
+    {
+        return DateTime.Now;
+    }
+
 
   } // end class DataRecordGenerator
 } // end namespace DataRecord
