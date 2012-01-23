@@ -57,7 +57,6 @@ namespace DataRecord
     public void registerAlgorithm(Algorithm.Algorithm algo){
       if(!checkForDataFields(algo.requiredDataFields))
         throw new System.ArgumentException("Algorithm requires key that is non-existant.");
-      registerDataFieldWithDataRecord(algo.getData());
       algos.Add(algo);
     }
 
