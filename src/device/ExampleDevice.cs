@@ -6,12 +6,8 @@ namespace Device
 {
   public class ExampleDevice : Device
   {
-    public ExampleDevice(){}
+    public ExampleDevice(){name = "ExampleDevice";}
     //~ExampleDevice(){}
-
-    protected override void init() {
-      this.name = "Example Device";
-    }
 
     protected override void registerDataTypes(){
       data.Add("Example Int", new int());

@@ -6,22 +6,15 @@ namespace Device
 {
   public class PulseOx : Device
   {
-    private bool _running = false;
     private bool _mode;
     OnyxII po;
 
-    public PulseOx(){}
-    //~PulseOx(){}
-
-    protected override void init() {
-      this.name = "PulseOx";
-      this._mode = true;
-
-      if (!_running){
-        po = new OnyxII(_mode);
-        _running = true;
-      }
+    public PulseOx(bool mode){
+      _mode = mode;
+      name = "PulseOx";
+      po = new OnyxII(_mode);
     }
+    //~PulseOx(){}
 
     protected override void registerDataTypes(){
       data.Add("Heart Rate", new int());
@@ -40,10 +33,6 @@ namespace Device
     private int[] parseData(string str){
       string[] vals = str.Split(',');
       return new int[] {int.Parse(vals[0]), int.Parse(vals[1])};
-    }
-
-    public void setSimulateMode(){
-      this._mode = true;
     }
 
   } // end class PulseOx

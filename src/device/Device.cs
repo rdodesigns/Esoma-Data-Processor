@@ -15,14 +15,12 @@ namespace Device
     private volatile bool _end = false; // Will be thread accessed.
 
     // Methods that require override
-    protected abstract void init();
+    //protected abstract void init();
     protected abstract void registerDataTypes();
     protected abstract void getInput();
 
     protected Device()
     {
-      this.init();
-      System.Console.WriteLine("Created {0} Device object.", this.name);
       this.registerDataTypes();
       data.Add("Timestamp", new DateTime());
     }
