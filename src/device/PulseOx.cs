@@ -6,13 +6,13 @@ namespace Device
 {
   public class PulseOx : Device
   {
-    private bool _mode;
+    private int _port;
     OnyxII po;
 
-    public PulseOx(bool mode){
-      _mode = mode;
+    public PulseOx(int port){
+      _port = port;
       name = "PulseOx";
-      po = new OnyxII(_mode);
+      po = new OnyxII(_port);
     }
     //~PulseOx(){}
 
@@ -26,7 +26,7 @@ namespace Device
       int[] vals = parseData(str);
       data["Heart Rate"] = vals[0];
       data["Blood Oxygenation"] = vals[1];
-      if (_mode)
+      if (_port == 0)
         System.Threading.Thread.Sleep(1000);
     }
 

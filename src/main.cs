@@ -9,7 +9,7 @@ class DataProcessor
     DataRecord.DataRecordGenerator drg = new DataRecord.DataRecordGenerator();
     DataRecord.DataRecordPool drp = new DataRecord.DataRecordPool(drg);
 
-    drg.registerDevice(new Device.PulseOx(true));
+    drg.registerDevice(new Device.PulseOx(0));
     drg.registerAlgorithm(new Algorithm.Met());
 
     drg.startGenerating();
