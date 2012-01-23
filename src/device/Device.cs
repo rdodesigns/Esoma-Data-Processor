@@ -7,9 +7,10 @@ namespace Device
 {
   public abstract class Device
   {
+    public event EventHandler<DeviceDataEvent> RaiseDeviceDataEvent;
+
     protected string name;
     protected SortedList data = new SortedList();
-    private DataRecord.DataRecordGenerator _drg;
     private bool _stopped = false;
     private volatile bool _end = false; // Will be thread accessed.
 
@@ -43,7 +44,7 @@ namespace Device
       while (!_end){
         this.getInput();
         data["Timestamp"] = getTimestamp();
-        _drg.sendToDataRecord(data);
+        OnRaiseDeviceDataEvent(new DeviceDataEvent(data));
       }
     }
 
@@ -54,9 +55,35 @@ namespace Device
         return DateTime.UtcNow;
     }
 
-    public void setDataRecordGenerator(DataRecord.DataRecordGenerator drg){
-      this._drg = drg;
+    protected virtual void OnRaiseDeviceDataEvent(DeviceDataEvent e)
+    {
+        // Make a temporary copy of the event to avoid possibility of
+        // a race condition if the last subscriber unsubscribes
+        // immediately after the null check and before the event is raised.
+        EventHandler<DeviceDataEvent> handler = RaiseDeviceDataEvent;
+
+        // Event will be null if there are no subscribers
+        if (handler != null)
+        {
+            // Use the () operator to raise the event.
+            handler(this, e);
+        }
     }
 
+
   } // end class Device
+
+  public class DeviceDataEvent : EventArgs
+  {
+      public DeviceDataEvent(SortedList incoming)
+      {
+          device_data = incoming;
+      }
+      private SortedList device_data;
+      public SortedList data
+      {
+          get { return device_data; }
+      }
+  } // end class DeviceDataEvent
+
 } // end namespace Device

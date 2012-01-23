@@ -66,7 +66,7 @@ namespace DataRecord
     public void registerDevice(Device.Device dev){
       registerDataFieldWithDataRecord(dev.getData());
       devices.Add(dev);
-      dev.setDataRecordGenerator(this);
+      dev.RaiseDeviceDataEvent += sendToDataRecord;
     }
 
     public void startGenerating(){
@@ -81,10 +81,10 @@ namespace DataRecord
       }
     }
 
-    public void sendToDataRecord(SortedList data) {
+    public void sendToDataRecord(object sender, Device.DeviceDataEvent data) {
       lock(loc){
         try {
-          addValues(data);
+          addValues(data.data);
         }
         catch (Exception ex) {
           System.Console.WriteLine("ERROR: Could not send to " +
