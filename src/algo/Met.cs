@@ -15,8 +15,8 @@ namespace Algorithm
       data.Add("MET", new float());
     }
 
-    protected override void run(){
-      data["MET"] = 4.4;
+    protected override void run(DataRecord.DataRecord incoming){
+      data["MET"] = (int) incoming.getData()["Heart Rate"] + 2.2;
     }
 
   } // end cladd Met

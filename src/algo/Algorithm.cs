@@ -9,7 +9,14 @@ namespace Algorithm
     public string[] requiredDataFields;
 
     protected abstract void registerDataTypes();
-    protected abstract void run();
+    protected abstract void run(DataRecord.DataRecord incoming);
+
+    public void process(ref DataRecord.DataRecord incoming){
+      try{
+        this.run(incoming);
+      } catch (Exception ex){ throw ex;}
+      incoming.addData(data);
+    }
 
     protected Algorithm()
     {

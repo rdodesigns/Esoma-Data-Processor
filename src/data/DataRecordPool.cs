@@ -44,6 +44,9 @@ namespace DataRecord
           dr = _data_record_queue.Dequeue();
         }
         if (dr == null) return;
+        foreach (Algorithm.Algorithm algo in _algos){
+          algo.process(ref dr);
+        }
         dr.printRecord();
       }
     }
