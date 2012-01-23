@@ -7,7 +7,7 @@ namespace Device
 {
   public abstract class Device
   {
-    public event EventHandler<DeviceDataEvent> RaiseDeviceDataEvent;
+    public event EventHandler<DataRecord.DataEvent> RaiseDataEvent;
 
     protected string name;
     protected SortedList data = new SortedList();
@@ -42,7 +42,7 @@ namespace Device
       while (!_end){
         this.getInput();
         data["Timestamp"] = getTimestamp();
-        OnRaiseDeviceDataEvent(new DeviceDataEvent(data));
+        OnRaiseDataEvent(new DataRecord.DataEvent(data));
       }
     }
 
@@ -53,12 +53,12 @@ namespace Device
         return DateTime.UtcNow;
     }
 
-    protected virtual void OnRaiseDeviceDataEvent(DeviceDataEvent e)
+    protected virtual void OnRaiseDataEvent(DataRecord.DataEvent e)
     {
         // Make a temporary copy of the event to avoid possibility of
         // a race condition if the last subscriber unsubscribes
         // immediately after the null check and before the event is raised.
-        EventHandler<DeviceDataEvent> handler = RaiseDeviceDataEvent;
+        EventHandler<DataRecord.DataEvent> handler = RaiseDataEvent;
 
         // Event will be null if there are no subscribers
         if (handler != null)
@@ -71,17 +71,5 @@ namespace Device
 
   } // end class Device
 
-  public class DeviceDataEvent : EventArgs
-  {
-      public DeviceDataEvent(SortedList incoming)
-      {
-          device_data = incoming;
-      }
-      private SortedList device_data;
-      public SortedList data
-      {
-          get { return device_data; }
-      }
-  } // end class DeviceDataEvent
 
 } // end namespace Device

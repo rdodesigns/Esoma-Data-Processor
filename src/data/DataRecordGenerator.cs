@@ -68,7 +68,7 @@ namespace DataRecord
     public void registerDevice(Device.Device dev){
       registerDataFieldWithDataRecord(dev.getData());
       devices.Add(dev);
-      dev.RaiseDeviceDataEvent += sendToDataRecord;
+      dev.RaiseDataEvent += sendToDataRecord;
     }
 
     public void startGenerating(){
@@ -83,7 +83,7 @@ namespace DataRecord
       }
     }
 
-    public void sendToDataRecord(object sender, Device.DeviceDataEvent data) {
+    public void sendToDataRecord(object sender, DataEvent data) {
       lock(loc){
         try {
           addValues(data.data);

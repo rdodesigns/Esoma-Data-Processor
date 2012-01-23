@@ -5,7 +5,7 @@ namespace DataRecord
 {
   public class DataRecordPool
   {
-    protected DataRecordPool()
+    public DataRecordPool(DataRecordGenerator drp)
     { }
 
 
