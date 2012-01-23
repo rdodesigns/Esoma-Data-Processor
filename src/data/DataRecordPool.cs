@@ -9,32 +9,43 @@ namespace DataRecord
   {
     private volatile bool _running = false;
     private List<Algorithm.Algorithm> _algos;
-    private Queue _data_record_queue = Queue.Synchronized(new Queue());
+    private Queue<DataRecord> _data_record_queue = new Queue<DataRecord>();
+    private readonly object _locker = new object();
+
     public DataRecordPool(DataRecordGenerator drp)
     {
       _algos = drp.algos;
       drp.RaiseDataRecord += acquireDataRecord;
 
       _running = true;
-      Thread consumer = new Thread(() =>
-          {
-              while (_running)
-              {
-                  if (_data_record_queue.Count > 0)
-                  {
-                      DataRecord dr = (DataRecord) _data_record_queue.Dequeue();
-                      dr.printRecord();
-                  }
-              }
-          });
+      Thread t = new Thread(consume);
+      t.Start();
+    }
 
-        consumer.IsBackground = true;
-        consumer.Start();
+    //~DataRecordPool() { }
+
+    public void destroyPool(){
+      _running = false;
     }
 
     private void acquireDataRecord(object sender,DataRecordEvent rec){
       System.Console.WriteLine("DataRecordPool gained a DataRecord.");
-      _data_record_queue.Enqueue(rec.data_record);
+      lock(_locker) {
+        _data_record_queue.Enqueue(rec.data_record);
+        Monitor.Pulse(_locker);
+      }
+    }
+
+    private void consume(){
+      while(_running){
+        DataRecord dr;
+        lock(_locker){
+          while (_data_record_queue.Count == 0) Monitor.Wait(_locker);
+          dr = _data_record_queue.Dequeue();
+        }
+        if (dr == null) return;
+        dr.printRecord();
+      }
     }
 
 

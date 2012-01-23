@@ -17,6 +17,7 @@ class DataProcessor
     while(Console.ReadKey(true).Key != ConsoleKey.Escape){ }
 
     drg.stopGenerating();
+    drp.destroyPool();
     //System.Environment.Exit(0);
   }
 
