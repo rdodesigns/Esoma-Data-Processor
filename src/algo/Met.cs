@@ -7,6 +7,7 @@ namespace Algorithm
     private float met;
 
     public Met(){
+      requiredDataFields = new string[] {"Heart Rate", "Blood Oxygenation"};
       System.Console.WriteLine("Initialised Met calculator.");
     }
 

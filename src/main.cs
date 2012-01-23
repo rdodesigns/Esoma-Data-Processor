@@ -8,8 +8,8 @@ class DataProcessor
   {
     DataRecord.DataRecordGenerator drg = new DataRecord.DataRecordGenerator();
 
-    drg.registerAlgorithm(new Algorithm.Met());
     drg.registerDevice(new Device.PulseOx(true));
+    drg.registerAlgorithm(new Algorithm.Met());
 
     drg.startGenerating();
 

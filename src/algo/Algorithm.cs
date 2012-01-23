@@ -6,6 +6,7 @@ namespace Algorithm
   public abstract class Algorithm
   {
     protected SortedList data = new SortedList();
+    public string[] requiredDataFields;
 
     protected abstract void registerDataTypes();
     protected abstract void run();
