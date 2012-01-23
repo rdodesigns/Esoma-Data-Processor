@@ -29,8 +29,8 @@ namespace DataRecord
       }
     }
 
-    public Hashtable getData(){
-      return data;
+    public dynamic getData(string key){
+      return data[key];
     }
 
   } // end class DataRecord

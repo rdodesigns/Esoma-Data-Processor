@@ -8,6 +8,8 @@
   <property name="build.dir" value="bin"/>
   <property name="src.dir" value="src"/>
   <property name="exe" value="${build.dir}/dps.exe"/>
+  <property name="nant.settings.currentframework" value="mono-4.0" />
+
 
   <!--Target clean-->
   <target name="clean" description="remove all generated files">

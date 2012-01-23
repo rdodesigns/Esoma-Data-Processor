@@ -1,4 +1,5 @@
 using System;
+using System.Dynamic;
 
 namespace Algorithm
 {
@@ -16,7 +17,7 @@ namespace Algorithm
     }
 
     protected override void run(DataRecord.DataRecord incoming){
-      data["MET"] = (int) incoming.getData()["Heart Rate"] + 2.2;
+      data["MET"] = incoming.getData("Heart Rate") + 2.2;
     }
 
   } // end cladd Met
