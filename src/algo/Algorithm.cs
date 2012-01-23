@@ -5,7 +5,7 @@ namespace Algorithm
 {
   public abstract class Algorithm
   {
-    protected SortedList data = new SortedList();
+    protected Hashtable data = new Hashtable();
     public string[] requiredDataFields;
 
     protected abstract void registerDataTypes();
@@ -16,7 +16,7 @@ namespace Algorithm
       this.registerDataTypes();
     }
 
-    public SortedList getData() {return data;}
+    public Hashtable getData() {return data;}
 
 
   } // end class Algorithm

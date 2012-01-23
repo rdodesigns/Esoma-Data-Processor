@@ -7,7 +7,7 @@ namespace DataRecord
   public class DataRecordGenerator
   {
     public System.Object loc = new System.Object();
-    private SortedList _data = new SortedList();
+    private Hashtable _data = new Hashtable();
     private List<Algorithm.Algorithm> algos = new List<Algorithm.Algorithm>();
     private List<Device.Device> devices = new List<Device.Device>();
 
@@ -15,10 +15,6 @@ namespace DataRecord
     {
       System.Console.WriteLine("Created DataRecordGenerator object.");
     }
-
-    public void removeKey(string key){ _data.Remove(key); }
-
-    public IList getKeys(){ return _data.GetKeyList(); }
 
     public bool ContainsKey(string key){return _data.ContainsKey(key);}
 
@@ -34,18 +30,18 @@ namespace DataRecord
       _data.Add(key, val);
     }
 
-    public void addValues(SortedList incoming){
+    public void addValues(Hashtable incoming){
       try{
-        for(int i=0; i < incoming.Count; i++)
-          _data[incoming.GetKey(i)] = incoming.GetByIndex(i);
+        foreach (DictionaryEntry e in incoming)
+          _data[e.Key] = e.Value;
         new DataRecord(_data);
       } catch (Exception ex){ throw ex; }
     }
 
-    public void registerDataFieldWithDataRecord(SortedList data){
+    public void registerDataFieldWithDataRecord(Hashtable data){
       try {
-        for(int i = 0; i < data.Count; i++)
-          addDataField((string) data.GetKey(i), data.GetByIndex(i));
+        foreach(DictionaryEntry e in data)
+          addDataField((string) e.Key, e.Value);
       }
       catch (Exception ex){
         System.Console.WriteLine(ex);
@@ -53,9 +49,9 @@ namespace DataRecord
       }
     }
 
-    private void unregisterDataFieldWithDataRecord(SortedList data){
-      for(int i = 0; i < data.Count; i++)
-          removeKey((string) data.GetKey(i));
+    private void unregisterDataFieldWithDataRecord(Hashtable data){
+      foreach(DictionaryEntry e in data)
+          _data.Remove((string) e.Key);
     }
 
     public void registerAlgorithm(Algorithm.Algorithm algo){

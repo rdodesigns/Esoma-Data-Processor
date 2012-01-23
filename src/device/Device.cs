@@ -10,7 +10,7 @@ namespace Device
     public event EventHandler<DataRecord.DataEvent> RaiseDataEvent;
 
     protected string name;
-    protected SortedList data = new SortedList();
+    protected Hashtable data = new Hashtable();
     private bool _stopped = false;
     private volatile bool _end = false; // Will be thread accessed.
 
@@ -46,7 +46,7 @@ namespace Device
       }
     }
 
-    public SortedList getData(){ return data; }
+    public Hashtable getData(){ return data; }
 
     private DateTime getTimestamp()
     {

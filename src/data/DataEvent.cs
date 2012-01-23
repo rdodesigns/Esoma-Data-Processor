@@ -5,12 +5,12 @@ namespace DataRecord
 {
   public class DataEvent : EventArgs
   {
-      public DataEvent(SortedList incoming)
+      public DataEvent(Hashtable incoming)
       {
           device_data = incoming;
       }
-      private SortedList device_data;
-      public SortedList data
+      private Hashtable device_data;
+      public Hashtable data
       {
           get { return device_data; }
       }

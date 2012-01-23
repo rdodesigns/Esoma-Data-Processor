@@ -5,13 +5,13 @@ namespace DataRecord
 {
   public class DataRecord
   {
-    private SortedList _data;
-    public DataRecord(SortedList data)
+    private Hashtable _data;
+    public DataRecord(Hashtable data)
     {
-      this._data = new SortedList(data);
+      this._data = new Hashtable(data);
       System.Console.WriteLine("Created DataRecord object.");
-      for(int i = 0; i < data.Count; i++)
-        System.Console.WriteLine("{0}: {1}", data.GetKey(i), data.GetByIndex(i));
+      foreach(DictionaryEntry e in data)
+        System.Console.WriteLine("{0}: {1}", e.Key, e.Value);
       System.Console.WriteLine("");
     }
   } // end class DataRecord
