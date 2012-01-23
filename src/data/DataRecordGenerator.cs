@@ -6,9 +6,11 @@ namespace DataRecord
 {
   public class DataRecordGenerator
   {
-    public System.Object loc = new System.Object();
+    private System.Object loc = new System.Object();
+    public event EventHandler<DataRecordEvent> RaiseDataRecord;
+
     private Hashtable _data = new Hashtable();
-    private List<Algorithm.Algorithm> algos = new List<Algorithm.Algorithm>();
+    public List<Algorithm.Algorithm> algos = new List<Algorithm.Algorithm>();
     private List<Device.Device> devices = new List<Device.Device>();
 
     public DataRecordGenerator()
@@ -34,7 +36,7 @@ namespace DataRecord
       try{
         foreach (DictionaryEntry e in incoming)
           _data[e.Key] = e.Value;
-        new DataRecord(_data);
+        OnRaiseDataRecordEvent(new DataRecordEvent(new DataRecord(_data)));
       } catch (Exception ex){ throw ex; }
     }
 
@@ -97,6 +99,14 @@ namespace DataRecord
       return true;
     }
 
+    protected virtual void OnRaiseDataRecordEvent(DataRecordEvent e)
+    {
+        EventHandler<DataRecordEvent> handler = RaiseDataRecord;
+        if (handler != null)
+        {
+            handler(this, e);
+        }
+    }
 
   } // end class DataRecordGenerator
 } // end namespace DataRecord

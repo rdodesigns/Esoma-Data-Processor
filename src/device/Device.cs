@@ -55,15 +55,10 @@ namespace Device
 
     protected virtual void OnRaiseDataEvent(DataRecord.DataEvent e)
     {
-        // Make a temporary copy of the event to avoid possibility of
-        // a race condition if the last subscriber unsubscribes
-        // immediately after the null check and before the event is raised.
         EventHandler<DataRecord.DataEvent> handler = RaiseDataEvent;
 
-        // Event will be null if there are no subscribers
         if (handler != null)
         {
-            // Use the () operator to raise the event.
             handler(this, e);
         }
     }

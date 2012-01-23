@@ -10,7 +10,10 @@ namespace DataRecord
     {
       this._data = new Hashtable(data);
       System.Console.WriteLine("Created DataRecord object.");
-      foreach(DictionaryEntry e in data)
+    }
+
+    public void printRecord(){
+      foreach(DictionaryEntry e in _data)
         System.Console.WriteLine("{0}: {1}", e.Key, e.Value);
       System.Console.WriteLine("");
     }
