@@ -15,7 +15,7 @@ namespace Algorithm
       this.registerDataTypes();
     }
 
-    public SortedList getDataFields() {return data;}
+    public SortedList getData() {return data;}
 
 
   } // end class Algorithm

@@ -59,7 +59,7 @@ namespace DataRecord
     }
 
     public void registerAlgorithm(Algorithm.Algorithm algo){
-      registerDataFieldWithDataRecord(algo.getDataFields());
+      registerDataFieldWithDataRecord(algo.getData());
       algos.Add(algo);
     }
 
