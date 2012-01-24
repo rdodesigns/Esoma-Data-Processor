@@ -24,6 +24,26 @@
     <csc target="exe" output="${exe}" debug="${debug}">
       <sources basedir="${src.dir}">
         <include name="**/*.cs" />
+        <exclude name="**/Example*.cs" />
+      </sources>
+
+      <references basedir="${lib.dir}">
+        <include name="*.dll" />
+      </references>
+    </csc>
+
+    <copy todir="${build.dir}">
+      <fileset basedir="${lib.dir}">
+      <include name="*.dll" />
+      </fileset>
+    </copy>
+  </target>
+
+  <!--Target build-->
+  <target name="build_all" description="compiles the source code">
+    <csc target="exe" output="${exe}" debug="${debug}">
+      <sources basedir="${src.dir}">
+        <include name="**/*.cs" />
       </sources>
 
       <references basedir="${lib.dir}">
@@ -43,6 +63,7 @@
     <csc target="library" output="${dll}" debug="${debug}">
       <sources basedir="${src.dir}">
         <include name="**/*.cs" />
+        <exclude name="**/Example*.cs" />
       </sources>
 
       <references basedir="${lib.dir}">
