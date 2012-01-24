@@ -1,22 +1,22 @@
-//using System;
+using System;
+using System.Dynamic;
 
-//namespace Algorithm
-//{
-  //public class ExampleAlgorithm : Algorithm
-  //{
-    //private float algorithm_variable;
+namespace Algorithm
+{
+  public class ExampleAlgorithm : Algorithm
+  {
+    public ExampleAlgorithm(){
+      requiredDataFields = new string[] {"Blood Oxygenation"};
+      System.Console.WriteLine("Initialised ExampleClass calculator.");
+    }
 
-    //public ExampleAlgorithm(){
-      //System.Console.WriteLine("Initialised ExampleAlgorithm calculator.");
-    //}
+    protected override void registerDataTypes(){
+      data.Add("ExampleAlgo", new float());
+    }
 
-    //protected override void registerDataTypes(){
-      //data.Add("Example Algo", new float());
-    //}
+    protected override void run(DataRecord.DataRecord incoming){
+      data["ExampleAlgo"] = incoming.getData("Blood Oxygenation") + 12.2;
+    }
 
-    //protected override void run(){
-      //data["Example Algo"] = 4.4;
-    //}
-
-  //} // end cladd Met
-//} // end namespace Algorithm
+  } // end cladd Met
+} // end namespace Algorithm

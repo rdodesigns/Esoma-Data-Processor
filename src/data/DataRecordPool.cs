@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
+using System.Linq;
 
 namespace DataRecord
 {
@@ -44,9 +45,7 @@ namespace DataRecord
           dr = _data_record_queue.Dequeue();
         }
         if (dr == null) return;
-        foreach (Algorithm.Algorithm algo in _algos){
-          algo.process(ref dr);
-        }
+        _algos.AsParallel().ForAll(x => x.process(ref dr));
         dr.printRecord();
       }
     }
