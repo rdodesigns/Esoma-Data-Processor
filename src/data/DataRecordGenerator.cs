@@ -16,6 +16,7 @@ namespace DataRecord
     public DataRecordGenerator()
     {
       System.Console.WriteLine("Created DataRecordGenerator object.");
+      _data.Add("Timestamp", new DateTime());
     }
 
     public bool ContainsKey(string key){return _data.ContainsKey(key);}
@@ -25,9 +26,12 @@ namespace DataRecord
         throw new System.MemberAccessException("Could not add " +
           val + " to DataRecordGenerator, key is null");
 
+      if (key == "Timestamp") return;
+
       if (_data.ContainsKey(key)){
-        throw new System.MemberAccessException("Key already exists.");
+        throw new System.MemberAccessException("Key " + key + " already exists.");
       }
+
 
       _data.Add(key, val);
     }

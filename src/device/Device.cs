@@ -12,7 +12,7 @@ namespace Device
     protected string name;
     protected Hashtable data = new Hashtable();
     private bool _stopped = false;
-    private volatile bool _end = false; // Will be thread accessed.
+    protected volatile bool _end = false; // Will be thread accessed.
 
     // Methods that require override
     //protected abstract void init();
@@ -38,7 +38,7 @@ namespace Device
     public void stop() { _end = true;}
 
     // Thread runs this code.
-    public void acquireData(){
+    public virtual void acquireData(){
       while (!_end){
         this.getInput();
         data["Timestamp"] = getTimestamp();
@@ -48,7 +48,7 @@ namespace Device
 
     public Hashtable getData(){ return data; }
 
-    private DateTime getTimestamp()
+    protected DateTime getTimestamp()
     {
         return DateTime.UtcNow;
     }

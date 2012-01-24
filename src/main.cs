@@ -10,6 +10,7 @@ class DataProcessor
     DataRecord.DataRecordPool drp = new DataRecord.DataRecordPool(drg);
 
     drg.registerDevice(new Device.PulseOx(0));
+    drg.registerDevice(new Device.Zigfu());
     drg.registerAlgorithm(new Algorithm.Met());
 
     Client.Zigfu client = new Client.Zigfu();
