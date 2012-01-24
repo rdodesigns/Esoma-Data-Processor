@@ -34,11 +34,36 @@ namespace DataRecord
     }
 
     public string getRecordAsJson(){
-      string output = "";
-      foreach(DictionaryEntry e in data)
-        output += (string) e.Key + ": " + e.Value.ToString();
-      return output;
+      string output = "{";
+      foreach(DictionaryEntry e in data){
+        output += "\"" + e.Key + "\": ";
+        Type type = e.Value.GetType();
+        if (type == typeof(string)){
+          output += "\"" + (string) e.Value + "\"";
+        } else if (type == typeof(DateTime)){
+          output += "\"" + ((DateTime)e.Value).ToString("yyyy-MM-dd HH:mm:ss.ffff") + "\"";
+        } else if (type == typeof(int[])){
+          output += "[ ";
+          foreach(int var in (int[]) e.Value)
+            output  += var.ToString() + ", ";
+          output = output.Remove(output.Length - 2, 2) + " ]";
+        } else if (type == typeof(double[])){
+          output += "[ ";
+          foreach(double var in (double[]) e.Value)
+            output  += var.ToString() + ", ";
+          output = output.Remove(output.Length - 2, 2) + " ]";
+        //} else if (type == typeof(Types.Skeleton)){
+            //output += (Type.Skeleton) e.Value.ToString();
+        } else{
+          output += e.Value.ToString();
+        }
+        output += ", ";
+      }
+
+      return output.Remove(output.Length -2, 2) + "}";
     }
 
+
+//str.Remove(str.Length - 1, 1);
   } // end class DataRecord
 } // end namespace DataRecord

@@ -19,7 +19,7 @@ namespace Client
     public void attachTCPServer(TCPServer serv){this.serv = serv;}
 
     protected override void sendRecord(DataRecord.DataRecord dr){
-      //System.Console.WriteLine("Sending data to {0}.", client);
+      System.Console.WriteLine("Sending data to {0}.", client);
       try {
         serv.SendToClient(dr.getRecordAsJson(), client);
       } catch (Exception ex) {
