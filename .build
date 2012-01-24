@@ -3,11 +3,13 @@
   <description>Data Processor of Esoma</description>
 
   <!--Properties about the project-->
+  <property name="name" value="dps" />
   <property name="debug" value="true" overwrite="false" />
   <property name="lib.dir" value="lib"/>
   <property name="build.dir" value="bin"/>
   <property name="src.dir" value="src"/>
-  <property name="exe" value="${build.dir}/dps.exe"/>
+  <property name="exe" value="${build.dir}/${name}.exe"/>
+  <property name="dll" value="${build.dir}/${name}.dll"/>
   <property name="nant.settings.currentframework" value="mono-4.0" />
 
 
@@ -20,6 +22,25 @@
   <!--Target build-->
   <target name="build" description="compiles the source code">
     <csc target="exe" output="${exe}" debug="${debug}">
+      <sources basedir="${src.dir}">
+        <include name="**/*.cs" />
+      </sources>
+
+      <references basedir="${lib.dir}">
+        <include name="*.dll" />
+      </references>
+    </csc>
+
+    <copy todir="${build.dir}">
+      <fileset basedir="${lib.dir}">
+      <include name="*.dll" />
+      </fileset>
+    </copy>
+  </target>
+
+  <!--Target dll-->
+  <target name="library" description="compiles the source code as a dll">
+    <csc target="library" output="${dll}" debug="${debug}">
       <sources basedir="${src.dir}">
         <include name="**/*.cs" />
       </sources>
