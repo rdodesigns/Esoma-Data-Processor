@@ -11,7 +11,7 @@ namespace DataRecord
     public DataRecord(Hashtable data)
     {
       this.data = new Hashtable(data);
-      System.Console.WriteLine("Created DataRecord object.");
+      //System.Console.WriteLine("Created DataRecord object.");
     }
 
     public void printRecord(){

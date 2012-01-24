@@ -14,7 +14,7 @@ class DataProcessor
     drg.registerDevice(zf);
     drg.registerAlgorithm(new Algorithm.Met());
 
-    Client.Zigfu client = new Client.Zigfu();
+    Client.Zigfu client = new Client.Zigfu(zf.serv);
     client.attachToPool(drp);
     client.attachTCPServer(zf.serv);
 
@@ -24,7 +24,7 @@ class DataProcessor
 
     drg.stopGenerating();
     drp.destroyPool();
-    //System.Environment.Exit(0);
+    System.Environment.Exit(0); // Needed to kill TCPServer
   }
 
 } // end class DataProcessor

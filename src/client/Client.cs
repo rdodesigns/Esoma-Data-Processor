@@ -8,7 +8,7 @@ namespace Client
     protected Client() { }
 
     protected virtual void catchRecord(object sender, DataRecord.DataRecordEvent dre){
-      System.Console.WriteLine("Received by Client.");
+      //System.Console.WriteLine("Received by Client.");
       sendRecord(dre.data_record);
     }
 

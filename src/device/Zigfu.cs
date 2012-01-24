@@ -5,7 +5,7 @@ namespace Device
 {
   public class Zigfu : TCPDevice
   {
-    public Zigfu(){name = "Zigfu Device";}
+    public Zigfu(){name = "U";}
     //~ExampleDevice(){}
 
     protected override void registerDataTypes(){

@@ -3,16 +3,12 @@ using EsomaTCP.TCPServer;
 
 namespace Client
 {
-  public class Zigfu : Client
+  public class Zigfu : TCPClient
   {
-    private TCPServer serv;
-    public Zigfu() { }
-
-    public void attachTCPServer(TCPServer serv){this.serv = serv;}
-
-    protected override void sendRecord(DataRecord.DataRecord dr){
-      serv.SendToClient(dr.getRecordAsJson(), "UNITY");
+    public Zigfu(TCPServer serv) : base(serv) {
+      client = "UNITY";
     }
+
 
     //protected virtual void catchRecord(object sender, DataRecord.DataRecordEvent dre){
       //dre.data_record.printRecord();

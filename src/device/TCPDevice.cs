@@ -26,9 +26,9 @@ namespace Device
     }
 
     protected void onDataReceived(string sendername, string data){
-      System.Console.WriteLine("Received Data.");
+      //System.Console.WriteLine("Received Data.");
+      if (!(sendername == name)) return;
       _new_data = data;
-      System.Console.WriteLine(data);
       auto.Set();
     }
 

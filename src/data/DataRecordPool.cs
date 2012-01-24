@@ -32,7 +32,7 @@ namespace DataRecord
     }
 
     private void acquireDataRecord(object sender,DataRecordEvent rec){
-      System.Console.WriteLine("DataRecordPool gained a DataRecord.");
+      //System.Console.WriteLine("DataRecordPool gained a DataRecord.");
       lock(_locker) {
         _data_record_queue.Enqueue(rec.data_record);
         Monitor.Pulse(_locker);
