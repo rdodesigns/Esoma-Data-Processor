@@ -10,11 +10,13 @@ class DataProcessor
     DataRecord.DataRecordPool drp = new DataRecord.DataRecordPool(drg);
 
     drg.registerDevice(new Device.PulseOx(0));
-    drg.registerDevice(new Device.Zigfu());
+    Device.Zigfu zf = new Device.Zigfu();
+    drg.registerDevice(zf);
     drg.registerAlgorithm(new Algorithm.Met());
 
     Client.Zigfu client = new Client.Zigfu();
     client.attachToPool(drp);
+    client.attachTCPServer(zf.serv);
 
     drg.startGenerating();
 

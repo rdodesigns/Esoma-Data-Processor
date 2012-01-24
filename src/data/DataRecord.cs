@@ -33,5 +33,12 @@ namespace DataRecord
       return data[key];
     }
 
+    public string getRecordAsJson(){
+      string output = "";
+      foreach(DictionaryEntry e in data)
+        output += (string) e.Key + ": " + e.Value.ToString();
+      return output;
+    }
+
   } // end class DataRecord
 } // end namespace DataRecord

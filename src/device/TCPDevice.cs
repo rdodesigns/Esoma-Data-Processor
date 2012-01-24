@@ -6,7 +6,7 @@ namespace Device
 {
   public abstract class TCPDevice : Device
   {
-    public static TCPServer serv;
+    public TCPServer serv;
 
     protected string _new_data;
     private AutoResetEvent auto = new AutoResetEvent (false);
