@@ -7,7 +7,7 @@ programs.
 
 Before using this library you will need:
 
-  - .NET (Windows) or Mono (any platform)
+  - .NET 4.0 (Windows) or Mono 2.8+ (any platform)
   - [NAnt][nant], a C# build tool.
 
 
