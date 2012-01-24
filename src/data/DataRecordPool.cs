@@ -8,6 +8,8 @@ namespace DataRecord
 {
   public class DataRecordPool
   {
+    public event EventHandler<DataRecordEvent> RaiseDataRecord;
+
     private volatile bool _running = false;
     private List<Algorithm.Algorithm> _algos;
     private Queue<DataRecord> _data_record_queue = new Queue<DataRecord>();
@@ -46,11 +48,18 @@ namespace DataRecord
         }
         if (dr == null) return;
         _algos.AsParallel().ForAll(x => x.process(ref dr));
-        dr.printRecord();
+        OnRaiseDataRecordEvent(new DataRecordEvent(dr));
       }
     }
 
-
+    protected virtual void OnRaiseDataRecordEvent(DataRecordEvent e)
+    {
+        EventHandler<DataRecordEvent> handler = RaiseDataRecord;
+        if (handler != null)
+        {
+            handler(this, e);
+        }
+    }
 
   } // end class Algorithm
 } // end namespace Algorithm

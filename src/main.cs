@@ -12,6 +12,9 @@ class DataProcessor
     drg.registerDevice(new Device.PulseOx(0));
     drg.registerAlgorithm(new Algorithm.Met());
 
+    Client.Zigfu client = new Client.Zigfu();
+    client.attachToPool(drp);
+
     drg.startGenerating();
 
     while(Console.ReadKey(true).Key != ConsoleKey.Escape){ }

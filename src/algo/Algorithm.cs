@@ -25,6 +25,5 @@ namespace Algorithm
 
     public Hashtable getData() {return data;}
 
-
   } // end class Algorithm
 } // end namespace Algorithm
