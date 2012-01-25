@@ -9,6 +9,7 @@ class DataProcessor
     DataRecord.DataRecordGenerator drg = new DataRecord.DataRecordGenerator();
     DataRecord.DataRecordPool drp = new DataRecord.DataRecordPool(drg);
 
+    drg.registerPatient(new Patient.Patient());
     drg.registerDevice(new Device.PulseOx(0));
     Device.Zigfu zf = new Device.Zigfu();
     drg.registerDevice(zf);
