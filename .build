@@ -15,7 +15,6 @@
 
   <!--Target clean-->
   <target name="clean" description="remove all generated files">
-    <delete file="${exe}" failonerror="false" />
     <delete dir="${build.dir}" failonerror="false" />
   </target>
 

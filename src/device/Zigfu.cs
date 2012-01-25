@@ -14,6 +14,7 @@ namespace Device
 
     protected override void getInput(){
       try{
+        System.Console.WriteLine(_new_data);
         data["Skeleton"] = new Types.Skeleton(parseInputforJointPositions(), parseInputforJointRotations());
       } catch (Exception ex) { System.Console.WriteLine("Ha, got ya!");}
     }
@@ -28,11 +29,11 @@ namespace Device
       return output;
     }
 
-    private double[][] parseInputforJointRotations(){
-      double[][] output = new double[15][];
+    private double[][,] parseInputforJointRotations(){
+      double[][,] output = new double[15][,];
 
       for (int i = 0; i < output.Length; i++){
-        output[i] = new double[] {1,2,3};
+        output[i] = new double[,] {{1,2,3},{4,5,6},{7,8,9}};
       }
 
       return output;
