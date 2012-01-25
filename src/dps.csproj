@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{867FD9F3-E49E-4A75-8DBD-26EDA443898A}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>dps</RootNamespace>
+    <AssemblyName>dps</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Externalconsole>true</Externalconsole>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>none</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Externalconsole>true</Externalconsole>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="EsomaTCP">
+      <HintPath>..\..\TCP_IP\EsomaTCP\bin\Debug\EsomaTCP.dll</HintPath>
+    </Reference>
+    <Reference Include="pulsoximeter_library">
+      <HintPath>..\..\pulsoximeter\pulsoximeter_library\pulsoximeter_library\pulsoximeter_library.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="algo\Algorithm.cs" />
+    <Compile Include="algo\ExampleAlgorithm.cs" />
+    <Compile Include="algo\Met.cs" />
+    <Compile Include="client\Client.cs" />
+    <Compile Include="client\TCPClient.cs" />
+    <Compile Include="client\Zigfu.cs" />
+    <Compile Include="data\DataEvent.cs" />
+    <Compile Include="data\DataRecord.cs" />
+    <Compile Include="data\DataRecordGenerator.cs" />
+    <Compile Include="data\DataRecordPool.cs" />
+    <Compile Include="device\Device.cs" />
+    <Compile Include="device\ExampleDevice.cs" />
+    <Compile Include="device\PulseOx.cs" />
+    <Compile Include="device\TCPDevice.cs" />
+    <Compile Include="device\Zigfu.cs" />
+    <Compile Include="types\Skeleton.cs" />
+    <Compile Include="main.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <Folder Include="status\" />
+  </ItemGroup>
+</Project>
