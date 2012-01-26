@@ -58,6 +58,8 @@
     <Compile Include="device\Zigfu.cs" />
     <Compile Include="types\Skeleton.cs" />
     <Compile Include="main.cs" />
+    <Compile Include="patient\Patient.cs" />
+    <Compile Include="client\Indivo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
