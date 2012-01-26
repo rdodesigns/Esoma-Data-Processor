@@ -72,6 +72,10 @@ namespace DataRecord
       dev.RaiseDataEvent += sendToDataRecord;
     }
 
+    public void registerPatient(Patient.Patient p){
+      registerDataFieldWithDataRecord(p.data);
+    }
+
     public void startGenerating(){
       foreach(Device.Device dev in devices){
         dev.start();

@@ -1,5 +1,6 @@
 using System;
 using System.Threading;
+using System.Linq;
 
 namespace Device
 {
@@ -13,28 +14,30 @@ namespace Device
     }
 
     protected override void getInput(){
-      try{
-        data["Skeleton"] = new Types.Skeleton(parseInputforJointPositions(), parseInputforJointRotations());
-      } catch (Exception ex) { System.Console.WriteLine("Ha, got ya!");}
+      double[][] super_array = _new_data.Split('|').Select(o => o.Split(';').Select(p => Convert.ToDouble(p)).ToArray()).ToArray();
+      data["Skeleton"] = new Types.Skeleton(parseInputforJointPositions(super_array), parseInputforJointRotations(super_array));
     }
 
-    private double[][] parseInputforJointPositions(){
-      double[][] output = new double[15][];
+    private double[][] parseInputforJointPositions(double[][] arr){
+      double[][] output = new double[7][];
 
-      for (int i = 0; i < output.Length; i++){
-        output[i] = new double[] {1,2,3};
-      }
+      for (int i = 0; i < arr.GetLength(0); i++)
+        output[i] = arr[i].Skip(9).Take(3).ToArray();
 
       return output;
     }
 
-    private double[][] parseInputforJointRotations(){
-      double[][] output = new double[15][];
+    private double[][,] parseInputforJointRotations(double[][] arr){
+      double[][,] output = new double[7][,];
 
-      for (int i = 0; i < output.Length; i++){
-        output[i] = new double[] {1,2,3};
+      for (int i = 0; i < output.GetLength(0); i++) {
+        double [,] tmp = new double[3,3];
+        for(int j = 0; j < 3; j++)
+          for(int k = 0; k < 3; k++)
+            tmp[j,k] = arr[i][j+k];
+
+        output[i] = tmp;
       }
-
       return output;
     }
 
