@@ -14,6 +14,7 @@ class DataProcessor
     Device.Zigfu zf = new Device.Zigfu();
     drg.registerDevice(zf);
     drg.registerAlgorithm(new Algorithm.Met());
+    drg.registerAlgorithm(new Algorithm.ExerciseAdherence());
 
     Client.Zigfu client = new Client.Zigfu(zf.serv);
     //Client.Indivo ind = new Client.Indivo(zf.serv);

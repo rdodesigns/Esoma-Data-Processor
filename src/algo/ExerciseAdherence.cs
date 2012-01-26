@@ -10,7 +10,7 @@ namespace Algorithm
     private MovementAlgo mov = new MovementAlgo();
 
     public ExerciseAdherence(){
-      requiredDataFields = new string[] {"Types.Skeleton"};
+      requiredDataFields = new string[] {"Skeleton"};
       System.Console.WriteLine("Initialised ExerciseAdherence calculator.");
     }
 
@@ -19,7 +19,7 @@ namespace Algorithm
     }
 
     protected override void run(DataRecord.DataRecord incoming){
-      Types.Skeleton skel = incoming.getData("Types.Skeleton");
+      Types.Skeleton skel = incoming.getData("Skeleton");
       if (skel._empty) return;
       mov.addAvatar(skel);
       mov.addPlayer(skel);
@@ -109,7 +109,9 @@ namespace Algorithm
       foreach(double theta in bad_count)
         sum += theta;
 
-      return sum/bad_count.Count;
+      double avg = sum/bad_count.Count;
+      if (double.IsNaN(avg)) return 0;
+      return avg;
     }
 
     private double calculateThetaOnPosition(double[] a, double[] b){

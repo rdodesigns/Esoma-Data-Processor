@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 
 namespace DataRecord
 {
@@ -7,6 +8,7 @@ namespace DataRecord
   {
     private readonly object _locker = new object();
     private Hashtable data;
+    public List<string> updated_fields = new List<string>();
 
     public DataRecord(Hashtable data)
     {

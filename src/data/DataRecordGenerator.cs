@@ -38,9 +38,15 @@ namespace DataRecord
 
     public void addValues(Hashtable incoming){
       try{
-        foreach (DictionaryEntry e in incoming)
+        List<string> updated_field = new List<string>();
+        foreach (DictionaryEntry e in incoming){
           _data[e.Key] = e.Value;
-        OnRaiseDataRecordEvent(new DataRecordEvent(new DataRecord(_data)));
+          updated_field.Add((string) e.Key);
+        }
+
+        DataRecord dr = new DataRecord(_data);
+        dr.updated_fields = updated_field;
+        OnRaiseDataRecordEvent(new DataRecordEvent(dr));
       } catch (Exception ex){ throw ex; }
     }
 
