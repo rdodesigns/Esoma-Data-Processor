@@ -26,10 +26,10 @@ namespace Device
     }
 
     protected void onDataReceived(string sendername, string data){
-      //System.Console.WriteLine("Received Data.");
       if (!(sendername == name)) return;
-      //if (data.StartsWith("CONNECT") || data.StartsWith("DISCONNECT")) return;
-      _new_data = data;
+
+      _new_data = data.Remove(0,2);
+      Console.WriteLine(data);
       auto.Set();
     }
 

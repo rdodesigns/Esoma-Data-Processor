@@ -16,10 +16,10 @@ class DataProcessor
     drg.registerAlgorithm(new Algorithm.Met());
 
     Client.Zigfu client = new Client.Zigfu(zf.serv);
-    Client.Indivo ind = new Client.Indivo(zf.serv);
+    //Client.Indivo ind = new Client.Indivo(zf.serv);
 
     client.attachToPool(drp);
-    ind.attachToPool(drp);
+    //ind.attachToPool(drp);
 
     drg.startGenerating();
 
