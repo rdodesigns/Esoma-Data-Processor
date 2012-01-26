@@ -6,7 +6,7 @@ namespace Types
   public class Skeleton
   {
 
-    private bool _empty = false;
+    public bool _empty = false;
     protected Dictionary<string, double[]> joint_pos = new Dictionary<string, double[]>();
     protected Dictionary<string, double[,]> joint_rot = new Dictionary<string, double[,]>();
     //private string[] joint_names = new string[] { "Head", "Neck", "Torso", "Left Shoulder", "Left Elbow", "Left Hand", "Right Shoulder", "Right Elbow", "Right Hand", "Left Hip", "Left Knee", "Left Foot", "Right Hip", "Right Knee", "Right Foot" };
