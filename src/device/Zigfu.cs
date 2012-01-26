@@ -14,7 +14,10 @@ namespace Device
     }
 
     protected override void getInput(){
-      double[][] super_array = _new_data.Split('|').Select(o => o.Split(';').Select(p => Convert.ToDouble(p)).ToArray()).ToArray();
+      double[][] super_array;
+      try{
+      super_array = _new_data.Split('|').Select(o => o.Split(';').Select(p => Convert.ToDouble(p)).ToArray()).ToArray();
+      } catch (Exception ex){System.Console.WriteLine("Bad String from Zigfu"); return;}
       data["Skeleton"] = new Types.Skeleton(parseInputforJointPositions(super_array), parseInputforJointRotations(super_array));
     }
 

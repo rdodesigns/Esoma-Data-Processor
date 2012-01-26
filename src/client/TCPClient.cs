@@ -15,6 +15,7 @@ namespace Client
     public void attachTCPServer(TCPServer serv){this.serv = serv;}
 
     protected override void sendRecord(DataRecord.DataRecord dr){
+      System.Console.WriteLine("Sending.");
       if (serv == null) throw new System.ArgumentNullException("TCPServer", "Client requires a reference to a TCP server.");
 
       //System.Console.WriteLine("Sending data to {0}.", client);

@@ -15,7 +15,6 @@ namespace Device
     protected volatile bool _end = false; // Will be thread accessed.
 
     // Methods that require override
-    //protected abstract void init();
     protected abstract void registerDataTypes();
     protected abstract void getInput();
 
@@ -40,8 +39,10 @@ namespace Device
     // Thread runs this code.
     public virtual void acquireData(){
       while (!_end){
-        this.getInput();
-        data["Timestamp"] = getTimestamp();
+        try{
+          this.getInput();
+          data["Timestamp"] = getTimestamp();
+        } catch(Exception ex) {System.Console.WriteLine("Could not get data."); throw ex;}
         OnRaiseDataEvent(new DataRecord.DataEvent(data));
       }
     }

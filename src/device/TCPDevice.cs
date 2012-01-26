@@ -19,8 +19,10 @@ namespace Device
 
     public override void acquireData(){
       while (!_end && auto.WaitOne()){
-        this.getInput();
-        data["Timestamp"] = getTimestamp();
+        try{
+          this.getInput();
+          data["Timestamp"] = getTimestamp();
+        } catch (Exception ex) {System.Console.WriteLine("Could not get data."); throw ex;}
         OnRaiseDataEvent(new DataRecord.DataEvent(data));
       }
     }
@@ -29,7 +31,7 @@ namespace Device
       if (!(sendername == name)) return;
 
       _new_data = data.Remove(0,2);
-      Console.WriteLine(data);
+      //Console.WriteLine(data);
       auto.Set();
     }
 

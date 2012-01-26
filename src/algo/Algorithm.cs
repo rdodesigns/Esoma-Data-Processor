@@ -19,6 +19,7 @@ namespace Algorithm
               runme = true;
         }
         if (runme) this.run(incoming);
+        this.run(incoming);
       } catch (Exception ex){ throw ex;}
       incoming.addData(data);
     }
