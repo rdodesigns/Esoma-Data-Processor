@@ -12,8 +12,13 @@ namespace Algorithm
     protected abstract void run(DataRecord.DataRecord incoming);
 
     public void process(ref DataRecord.DataRecord incoming){
+      bool runme = false;
       try{
-        this.run(incoming);
+        foreach (string field in requiredDataFields){
+          if (incoming.updated_fields.Contains(field))
+              runme = true;
+        }
+        if (runme) this.run(incoming);
       } catch (Exception ex){ throw ex;}
       incoming.addData(data);
     }
