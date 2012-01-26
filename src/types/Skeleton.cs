@@ -45,6 +45,14 @@ namespace Types
       return output.Remove(output.Length -1, 1) + "}";
     }
 
+    public double[] getJointPositionByName(string name){
+      return joint_pos[name];
+    }
+
+    public double[,] getJointRotationByName(string name){
+      return joint_rot[name];
+    }
+
   }
 }
 
