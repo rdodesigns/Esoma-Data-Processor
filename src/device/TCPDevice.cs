@@ -6,15 +6,14 @@ namespace Device
 {
   public abstract class TCPDevice : Device
   {
-    public TCPServer serv;
+    private TCPServer _serv;
 
     protected string _new_data;
     private AutoResetEvent auto = new AutoResetEvent (false);
 
-    protected TCPDevice(){
-      serv = new TCPServer();
+    protected TCPDevice(TCPServer serv){
       serv.DataManager += new DataManager(onDataReceived);
-      serv.StartServer();
+      _serv = serv;
     }
 
     public override void acquireData(){

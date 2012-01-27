@@ -1,6 +1,7 @@
 using System;
 using System.Threading;
 using System.Collections;
+using EsomaTCP.TCPServer;
 
 class DataProcessor
 {
@@ -9,15 +10,19 @@ class DataProcessor
     DataRecord.DataRecordGenerator drg = new DataRecord.DataRecordGenerator();
     DataRecord.DataRecordPool drp = new DataRecord.DataRecordPool(drg);
 
+    TCPServer serv = new TCPServer();
+
     drg.registerPatient(new Patient.Patient());
+
     drg.registerDevice(new Device.PulseOx(0));
-    Device.Zigfu zf = new Device.Zigfu();
-    drg.registerDevice(zf);
+    drg.registerDevice(new Device.Zigfu(serv));
+    drg.registerDevice(new Device.Indivo(serv));
+
     drg.registerAlgorithm(new Algorithm.Met());
     drg.registerAlgorithm(new Algorithm.ExerciseAdherence());
 
-    Client.Zigfu client = new Client.Zigfu(zf.serv);
-    Client.Indivo ind = new Client.Indivo(zf.serv);
+    Client.Zigfu client = new Client.Zigfu(serv);
+    Client.Indivo ind = new Client.Indivo(serv);
 
     client.attachToPool(drp);
     ind.attachToPool(drp);

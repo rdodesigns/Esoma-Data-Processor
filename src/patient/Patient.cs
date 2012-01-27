@@ -1,13 +1,18 @@
 using System;
 using System.Collections;
+using EsomaTCP.TCPServer;
 
 namespace Patient
 {
   public class Patient
   {
     public Hashtable data = new Hashtable();
+    private TCPServer _serv;
 
-    public Patient(){
+    public Patient(TCPServer serv){
+      _serv = serv;
+      _serv.DataManager += new DataManager(onDataReceived);
+
       double weight = 60.0;
       string gender = "Female";
       int age = 60;
@@ -18,6 +23,12 @@ namespace Patient
       data.Add("Age", 60);
       data.Add("Height", 160.0);// cm
       data.Add("RMR", calculateRMR(height, weight, age, gender));
+    }
+
+    onDataReceived(string sendername, string data){
+      if (!(sendername == name)) return;
+
+
     }
 
     private double calculateRMR(double height, double weight, int years, string gender){
