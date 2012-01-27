@@ -2,14 +2,14 @@
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.Workbench ActiveDocument="src/main.cs">
     <Files>
-      <File FileName="src/main.cs" Line="17" Column="3" />
+      <File FileName="src/main.cs" Line="17" Column="14" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
-        <State expanded="True">
+        <State expanded="True" selected="True">
+          <Option id="ShowVersionControlOverlays" value="True" />
+          <Option id="ShowAllFiles" value="False" />
           <Node name="dps" expanded="True">
-            <Option id="ShowVersionControlOverlays" value="True" />
-            <Option id="ShowAllFiles" value="False" />
             <Node name="algo" expanded="True" />
             <Node name="client" expanded="True">
               <Option id="ShowAllFiles" value="True" />
@@ -18,7 +18,6 @@
             <Node name="device" expanded="True" />
             <Node name="patient" expanded="True" />
             <Node name="types" expanded="True" />
-            <Node name="main.cs" selected="True" />
           </Node>
         </State>
       </Pad>
