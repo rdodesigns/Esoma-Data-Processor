@@ -60,6 +60,7 @@
     <Compile Include="main.cs" />
     <Compile Include="patient\Patient.cs" />
     <Compile Include="client\Indivo.cs" />
+    <Compile Include="algo\ExerciseAdherence.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

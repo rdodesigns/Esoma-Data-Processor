@@ -1,23 +1,24 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="src/main.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="src/client/Client.cs">
     <Files>
       <File FileName="src/main.cs" Line="17" Column="14" />
+      <File FileName="src/patient/Patient.cs" Line="28" Column="5" />
+      <File FileName="src/device/Device.cs" Line="1" Column="1" />
+      <File FileName="src/device/TCPDevice.cs" Line="1" Column="1" />
+      <File FileName="src/client/Indivo.cs" Line="1" Column="1" />
+      <File FileName="src/client/Zigfu.cs" Line="1" Column="1" />
+      <File FileName="src/client/Client.cs" Line="8" Column="27" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
-        <State expanded="True" selected="True">
+        <State expanded="True">
           <Option id="ShowVersionControlOverlays" value="True" />
           <Option id="ShowAllFiles" value="False" />
           <Node name="dps" expanded="True">
-            <Node name="algo" expanded="True" />
-            <Node name="client" expanded="True">
+            <Node name="client">
               <Option id="ShowAllFiles" value="True" />
             </Node>
-            <Node name="data" expanded="True" />
-            <Node name="device" expanded="True" />
-            <Node name="patient" expanded="True" />
-            <Node name="types" expanded="True" />
           </Node>
         </State>
       </Pad>
