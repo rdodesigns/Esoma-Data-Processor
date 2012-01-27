@@ -11,12 +11,16 @@ class DataProcessor
     DataRecord.DataRecordPool drp = new DataRecord.DataRecordPool(drg);
 
     TCPServer serv = new TCPServer();
+    serv.StartServer();
 
-    drg.registerPatient(new Patient.Patient());
+    Patient.Patient patient = new Patient.Patient(serv);
+    System.Console.WriteLine("Waiting for patient");
+    patient.waitForPatient();
+    drg.registerPatient(patient);
+    System.Console.WriteLine("Patient acquired.");
 
     drg.registerDevice(new Device.PulseOx(0));
     drg.registerDevice(new Device.Zigfu(serv));
-    drg.registerDevice(new Device.Indivo(serv));
 
     drg.registerAlgorithm(new Algorithm.Met());
     drg.registerAlgorithm(new Algorithm.ExerciseAdherence());

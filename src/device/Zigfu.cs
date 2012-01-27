@@ -1,12 +1,13 @@
 using System;
 using System.Threading;
 using System.Linq;
+using EsomaTCP.TCPServer;
 
 namespace Device
 {
   public class Zigfu : TCPDevice
   {
-    public Zigfu(){name = "U";}
+    public Zigfu(TCPServer serv): base(serv){name = "U";}
     //~ExampleDevice(){}
 
     protected override void registerDataTypes(){
