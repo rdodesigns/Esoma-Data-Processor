@@ -40,8 +40,8 @@ namespace Device
     public virtual void acquireData(){
       while (!_end){
         try{
-          this.getInput();
           data["Timestamp"] = getTimestamp();
+          this.getInput();
         } catch(Exception ex) {System.Console.WriteLine("Could not get data."); throw ex;}
         OnRaiseDataEvent(new DataRecord.DataEvent(data));
       }
