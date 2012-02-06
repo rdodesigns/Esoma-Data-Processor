@@ -25,21 +25,32 @@ namespace Algorithm
 {
   public abstract class Algorithm
   {
-    // Data to be added to DataRecord
+    /// Data to be added to DataRecord
     protected Hashtable data = new Hashtable();
-    // Fields required for the calculation, these are those collected from the
-    // Device classes.
+    /// Fields required for the calculation, these are those collected from the
+    /// Device classes. Must be overwritten.
     public string[] requiredDataFields;
 
-    // Register the data types to be added to the DataRecord after the
-    // algorithm runs. Use only "data.Add(string key, object initial_value)"
-    // to add data to the DataRecord object.
+    protected Algorithm()
+    {
+      // Allows for the hashtable fields to be altered when the algorithm runs.
+      this.registerDataTypes();
+    }
+
+    /// Returns the data created from the algorithm run function.
+    public Hashtable getData() {return data;}
+
+    /**
+     * Register the data types to be added to the DataRecord after the
+     * algorithm runs. Use only "data.Add(string key, object initial_value)"
+     * to add data to the DataRecord object.
+     */
     protected abstract void registerDataTypes();
 
-    // Code to run against the incoming data record.
+    /// Code to run against the incoming data record.
     protected abstract void run(DataRecord.DataRecord incoming);
 
-    // Process the DataRecord. This
+    /// Process the DataRecord. This is done asynchronously.
     public void process(ref DataRecord.DataRecord incoming){
       bool runme = true;
       try{
@@ -52,13 +63,6 @@ namespace Algorithm
       } catch (Exception ex){ throw ex;}
       incoming.addData(data);
     }
-
-    protected Algorithm()
-    {
-      this.registerDataTypes();
-    }
-
-    public Hashtable getData() {return data;}
 
   } // end class Algorithm
 } // end namespace Algorithm
